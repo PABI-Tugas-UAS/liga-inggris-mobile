@@ -1,16 +1,11 @@
-# liga_inggris_mobile
+# liga-inggris-mobile
 
-A new Flutter project.
+Deployment setup:
+1. copy example.env
+2. rename to .env
+3. run the app
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Commit Rules:
+1. always create new branch (e.g., feature/club-pages)
+2. pr to dev branch
+3. update the issue status and add comments about what you have done
