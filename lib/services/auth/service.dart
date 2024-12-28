@@ -11,16 +11,12 @@ class AuthService extends BaseService {
   ];
 
   Future<bool> login(String email, String password) async {
-    bool isValidUser = false;
-
     for (UserModel user in _userList) {
       if (user.email == email && user.password == password) {
-        isValidUser = true;
-        break;
+        return true;
       }
     }
-
-    return isValidUser;
+    return false;
   }
 
   List<UserModel> get userList => _userList;
