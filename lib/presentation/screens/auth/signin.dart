@@ -3,21 +3,23 @@ import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/config/app_background_color.dart';
 import 'package:liga_inggris_mobile/app/controllers/auth/auth_controller.dart';
 import 'package:liga_inggris_mobile/app/extensions/color.dart';
+import '../../common/button_widget.dart';
+import '../../common/input_field_widget.dart';
 
 class SignInScreen extends GetView<AuthController> {
+  SignInScreen({super.key});
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final RxBool _obscurePassword = true.obs;
 
-  SignInScreen({super.key});
-
-  void _login() {
+  void _handleLogin() {
     final email = _emailController.text;
     final password = _passwordController.text;
     Get.find<AuthController>().login(email, password);
   }
 
-  void _register() {
+  void _handleRegister() {
     Get.toNamed('/register');
   }
 
@@ -43,13 +45,57 @@ class SignInScreen extends GetView<AuthController> {
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Center(
-                    child: _SignInForm(
-                      emailController: _emailController,
-                      passwordController: _passwordController,
-                      obscurePassword: _obscurePassword,
-                      onLogin: _login,
-                      onRegister: _register,
-                    ),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(top: 8, bottom: 24),
+                            child: Text(
+                              'SIGN IN',
+                              style: TextStyle(
+                                  fontSize: 20, fontFamily: 'Poppins'),
+                            ),
+                          ),
+                          _SignInForm(
+                            emailController: _emailController,
+                            passwordController: _passwordController,
+                            obscurePassword: _obscurePassword,
+                          ),
+                          const SizedBox(height: 16),
+                          button(label: "Login", onPressed: _handleLogin),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const Row(
+                            children: [
+                              Expanded(
+                                child: Divider(
+                                  thickness: 1,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(
+                                  "or",
+                                  style: TextStyle(fontFamily: 'Poppins'),
+                                ),
+                              ),
+                              Expanded(
+                                child: Divider(
+                                  thickness: 1,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          button(label: 'Register', onPressed: _handleRegister),
+                          const SizedBox(
+                            height: 24,
+                          ),
+                        ]),
                   ),
                 ),
               ),
@@ -62,166 +108,32 @@ class SignInScreen extends GetView<AuthController> {
 }
 
 class _SignInForm extends StatelessWidget {
+  const _SignInForm({
+    required this.emailController,
+    required this.passwordController,
+    required this.obscurePassword,
+  });
+
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final RxBool obscurePassword;
-  final VoidCallback onLogin;
-  final VoidCallback onRegister;
-  const _SignInForm(
-      {required this.emailController,
-      required this.passwordController,
-      required this.obscurePassword,
-      required this.onLogin,
-      required this.onRegister});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 8, bottom: 24),
-          child: Text(
-            'SIGN IN',
-            style: TextStyle(fontSize: 20, fontFamily: 'Poppins'),
-          ),
-        ),
-        TextFormField(
+        inputField(
+          labelText: 'Email',
           controller: emailController,
-          style: const TextStyle(color: Colors.white, fontFamily: 'Poppins'),
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-            labelText: "Email",
-            labelStyle:
-                const TextStyle(color: Colors.grey, fontFamily: 'Poppins'),
-            hintText: "Masukkan email",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.grey, width: 2),
-            ),
-          ),
+          hintText: 'Masukkan email anda',
         ),
         const SizedBox(height: 16),
-        Obx(() {
-          return TextFormField(
-            controller: passwordController,
-            style: const TextStyle(color: Colors.white, fontFamily: 'Poppins'),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelText: "Kata Sandi",
-              labelStyle:
-                  const TextStyle(color: Colors.grey, fontFamily: 'Poppins'),
-              hintText: "Masukkan kata sandi",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(color: Colors.grey, width: 2),
-              ),
-              suffixIcon: IconButton(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                onPressed: () {
-                  obscurePassword.value = !obscurePassword.value;
-                },
-                icon: Icon(
-                  obscurePassword.value
-                      ? Icons.visibility_off
-                      : Icons.visibility,
-                ),
-              ),
-            ),
-            obscureText: obscurePassword.value,
-          );
-        }),
-        const SizedBox(height: 16),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {
-              final email = emailController.text;
-              final password = passwordController.text;
-              Get.find<AuthController>().login(email, password);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: HexColor("3E2F9A").withOpacity(0.45),
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
-              ),
-              side: const BorderSide(
-                color: Colors.white,
-                width: 0.5,
-              ),
-              padding: const EdgeInsets.symmetric(
-                vertical: 20,
-              ),
-            ),
-            child: const Text(
-              "Login",
-              style: TextStyle(fontSize: 16, fontFamily: 'Poppins'),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        const Row(
-          children: [
-            Expanded(
-              child: Divider(
-                thickness: 1,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                "or",
-                style: TextStyle(fontFamily: 'Poppins'),
-              ),
-            ),
-            Expanded(
-              child: Divider(
-                thickness: 1,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {
-              Get.toNamed('/register');
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: HexColor("3E2F9A").withOpacity(0.45),
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
-              ),
-              side: const BorderSide(
-                color: Colors.white,
-                width: 0.5,
-              ),
-              padding: const EdgeInsets.symmetric(
-                vertical: 20,
-              ),
-            ),
-            child: const Text(
-              "Register",
-              style: TextStyle(fontSize: 16, fontFamily: 'Poppins'),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 24,
+        inputField(
+          labelText: 'Kata Sandi',
+          controller: passwordController,
+          hintText: 'Masukkan kata sandi',
+          type: 'password',
+          obscurePassword: obscurePassword,
         ),
       ],
     );
