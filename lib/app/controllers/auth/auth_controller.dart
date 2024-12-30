@@ -8,6 +8,19 @@ class AuthController extends GetxController {
   var isLoggedIn = false.obs;
   final AuthService _authService = AuthService();
 
+  @override
+  void onInit() async {
+    super.onInit();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isLoggedIn.value = prefs.getBool('isLoggedIn') ?? false;
+
+    if (isLoggedIn.value) {
+      Get.offNamed('/');
+    } else {
+      Get.offNamed('/signin');
+    }
+  }
+
   Future<void> login(String email, String password) async {
     bool isValidUser = await _authService.login(email, password);
 

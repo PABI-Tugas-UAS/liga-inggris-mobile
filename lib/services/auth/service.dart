@@ -3,7 +3,6 @@ import 'package:liga_inggris_mobile/services/auth/model.dart';
 
 class AuthService extends BaseService {
   final List<UserModel> _userList = [
-    UserModel(name: '', email: '@', password: ''),
     UserModel(name: 'Herlin', email: 'herlin@gmail.com', password: 'admin123'),
     UserModel(name: 'Sharon', email: 'sharon@gmail.com', password: 'admin123'),
     UserModel(name: 'Fanes', email: 'fanes@gmail.com', password: 'admin123'),

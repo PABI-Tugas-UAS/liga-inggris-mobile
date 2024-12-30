@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:liga_inggris_mobile/app/config/app_colors.dart';
 
 Widget button({
   required String label,
@@ -9,7 +10,7 @@ Widget button({
     child: ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF3E2F9A).withOpacity(0.45),
+        backgroundColor: AppColors.buttonBackground,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),

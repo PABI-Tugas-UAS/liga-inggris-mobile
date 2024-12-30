@@ -8,4 +8,8 @@ class AppColors {
 
   static Color iconActive = HexColor("FFFFFF");
   static Color iconDisabled = HexColor.withOpacity("BDBDBD", 0.4);
+
+  static Color cardBackground = HexColor("0F1012").withOpacity(0.35);
+
+  static Color buttonBackground = HexColor('3E2F9A').withOpacity(0.45);
 }
