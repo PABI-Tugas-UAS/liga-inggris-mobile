@@ -6,14 +6,14 @@ import 'package:liga_inggris_mobile/app/enums/tab_enum.dart';
 import 'package:liga_inggris_mobile/presentation/controllers/home/home_binding.dart';
 import 'package:liga_inggris_mobile/presentation/pages/home/home_page.dart';
 
-class BasePage extends StatefulWidget {
-  const BasePage({super.key});
+class LayoutPage extends StatefulWidget {
+  const LayoutPage({super.key});
 
   @override
-  State<BasePage> createState() => _BasePageState();
+  State<LayoutPage> createState() => _LayoutPageState();
 }
 
-class _BasePageState extends State<BasePage> {
+class _LayoutPageState extends State<LayoutPage> {
   final CupertinoTabController _tabController = CupertinoTabController();
 
   @override
