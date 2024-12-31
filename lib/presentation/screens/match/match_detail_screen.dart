@@ -8,6 +8,7 @@ import 'package:liga_inggris_mobile/app/enums/match_details_tab_enum.dart';
 import 'package:liga_inggris_mobile/app/utils/time_convert.dart';
 import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
 import 'package:liga_inggris_mobile/presentation/common/custom_screen_layout.dart';
+import 'package:liga_inggris_mobile/presentation/screens/match/partial/tab_content_stats.dart';
 import 'package:liga_inggris_mobile/presentation/screens/match/partial/tab_content_timeline.dart';
 
 class MatchDetailScreen extends GetView<MatchController> {
@@ -39,7 +40,12 @@ class MatchDetailScreen extends GetView<MatchController> {
             children: [
               _screenContent(),
               _screenTabBar(setContentTabIndex),
-              Obx(() => _screenContentTab(contentTabIndex.value)),
+              Obx(
+                () => SizedBox(
+                  height: Get.height * 0.5,
+                  child: _screenContentTab(contentTabIndex.value),
+                ),
+              ),
             ],
           );
         }),
@@ -175,18 +181,12 @@ class MatchDetailScreen extends GetView<MatchController> {
 
   Widget _tabContentTimeline() {
     final matchTimeline = controller.matchDetails.value!.matchStats.timeline;
-    return SizedBox(
-      height: Get.height * 0.5,
-      child: TabContentTimeline(matchTimeline: matchTimeline),
-    );
+    return TabContentTimeline(matchTimeline: matchTimeline);
   }
 
   Widget _tabContentStats() {
-    return const Column(
-      children: [
-        Text("Stats"),
-      ],
-    );
+    final matchStats = controller.matchDetails.value!.matchStats.stats;
+    return TabContentStats(matchStats: matchStats);
   }
 
   Widget _tabContentLineUp() {
