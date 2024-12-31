@@ -58,6 +58,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: BaseBackground(
         child: Center(
           child: SingleChildScrollView(

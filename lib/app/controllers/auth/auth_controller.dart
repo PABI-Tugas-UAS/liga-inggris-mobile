@@ -19,6 +19,8 @@ class AuthController extends GetxController {
     } else {
       Get.offNamed('/signin');
     }
+
+    Get.delete();
   }
 
   Future<void> login(String email, String password) async {
@@ -30,6 +32,7 @@ class AuthController extends GetxController {
       await prefs.setString('email', email);
       isLoggedIn.value = true;
       Get.toNamed('/');
+      Get.delete();
     } else {
       Get.snackbar(
         "Login Gagal",
@@ -45,5 +48,6 @@ class AuthController extends GetxController {
     await prefs.clear();
     isLoggedIn.value = false;
     Get.toNamed('/signin');
+    Get.delete();
   }
 }

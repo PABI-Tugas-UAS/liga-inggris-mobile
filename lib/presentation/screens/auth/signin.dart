@@ -25,6 +25,7 @@ class SignInScreen extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: BaseBackground(
         child: Center(
           child: SingleChildScrollView(

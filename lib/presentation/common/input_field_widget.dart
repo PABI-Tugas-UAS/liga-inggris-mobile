@@ -17,11 +17,18 @@ class InputField extends StatefulWidget {
   });
 
   @override
-  _InputFieldState createState() => _InputFieldState();
+  InputFieldState createState() => InputFieldState();
 }
 
-class _InputFieldState extends State<InputField> {
+class InputFieldState extends State<InputField> {
   bool obscurePassword = true;
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +60,7 @@ class _InputFieldState extends State<InputField> {
             ),
           ),
         TextFormField(
+          focusNode: _focusNode,
           controller: widget.controller,
           style: const TextStyle(color: Colors.white, fontFamily: 'Poppins'),
           decoration: InputDecoration(
@@ -72,6 +80,7 @@ class _InputFieldState extends State<InputField> {
             suffixIcon: suffixIcon,
           ),
           obscureText: widget.type == 'password' && obscurePassword,
+          textInputAction: TextInputAction.done,
         ),
       ],
     );
