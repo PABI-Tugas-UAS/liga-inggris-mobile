@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liga_inggris_mobile/presentation/common/custom_app_bar.dart';
+import 'package:liga_inggris_mobile/presentation/common/custom_page_app_bar.dart';
 
 class CustomPageLayout extends StatelessWidget {
   final List<Widget> children;
@@ -14,16 +14,26 @@ class CustomPageLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const CustomPageAppBar(),
       backgroundColor: Colors.transparent,
+      resizeToAvoidBottomInset: true,
       body: DefaultTextStyle(
         style: const TextStyle(color: Colors.white),
         child: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Column(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildTitle(),
-              ...children,
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildTitle(),
+                    ...children,
+                  ],
+                ),
+              ),
             ],
           ),
         ),

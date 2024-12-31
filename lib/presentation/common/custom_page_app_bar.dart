@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/config/app_colors.dart';
 import 'package:liga_inggris_mobile/app/controllers/auth/auth_controller.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({
+class CustomPageAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomPageAppBar({
     super.key,
   });
 
