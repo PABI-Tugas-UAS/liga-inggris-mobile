@@ -8,7 +8,7 @@ import 'package:liga_inggris_mobile/app/enums/match_details_tab_enum.dart';
 import 'package:liga_inggris_mobile/app/utils/time_convert.dart';
 import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
 import 'package:liga_inggris_mobile/presentation/common/custom_screen_layout.dart';
-import 'package:liga_inggris_mobile/services/match/model.dart';
+import 'package:liga_inggris_mobile/presentation/screens/match/partial/tab_content_timeline.dart';
 
 class MatchDetailScreen extends GetView<MatchController> {
   final String matchId;
@@ -174,11 +174,10 @@ class MatchDetailScreen extends GetView<MatchController> {
   }
 
   Widget _tabContentTimeline() {
-    final matchDetails = controller.matchDetails.value!;
-    return const Column(
-      children: [
-        Text("Timeline"),
-      ],
+    final matchTimeline = controller.matchDetails.value!.matchStats.timeline;
+    return SizedBox(
+      height: Get.height * 0.5,
+      child: TabContentTimeline(matchTimeline: matchTimeline),
     );
   }
 
