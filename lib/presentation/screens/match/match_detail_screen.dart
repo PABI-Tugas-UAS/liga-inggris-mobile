@@ -109,9 +109,11 @@ class MatchDetailScreen extends GetView<MatchController> {
               ),
             ),
           ),
-          padding: const EdgeInsets.only(top: 28, bottom: 28),
+          padding:
+              const EdgeInsets.only(top: 28, bottom: 28, left: 20, right: 20),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ClubLogoWidget(
                 imageUrl: matchDetails.homeClub.logo!,
