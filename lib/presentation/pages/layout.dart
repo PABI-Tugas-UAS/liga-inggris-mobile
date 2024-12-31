@@ -4,16 +4,18 @@ import 'package:liga_inggris_mobile/app/config/app_background_color.dart';
 import 'package:liga_inggris_mobile/app/config/app_colors.dart';
 import 'package:liga_inggris_mobile/app/enums/tab_enum.dart';
 import 'package:liga_inggris_mobile/presentation/controllers/home/home_binding.dart';
+import 'package:liga_inggris_mobile/presentation/controllers/match/match_binding.dart';
 import 'package:liga_inggris_mobile/presentation/pages/home/home_page.dart';
+import 'package:liga_inggris_mobile/presentation/pages/match/match_page.dart';
 
-class BasePage extends StatefulWidget {
-  const BasePage({super.key});
+class LayoutPage extends StatefulWidget {
+  const LayoutPage({super.key});
 
   @override
-  State<BasePage> createState() => _BasePageState();
+  State<LayoutPage> createState() => _LayoutPageState();
 }
 
-class _BasePageState extends State<BasePage> {
+class _LayoutPageState extends State<LayoutPage> {
   final CupertinoTabController _tabController = CupertinoTabController();
 
   @override
@@ -39,13 +41,12 @@ class _BasePageState extends State<BasePage> {
   Widget _buildTabContent(TabEnums type) {
     switch (type) {
       case TabEnums.home:
-        HomeBinding().dependencies();
+        HomePageBinding().dependencies();
         return HomePage(tabController: _tabController);
 
       case TabEnums.matches:
-        return const Center(
-          child: Text('Matches'),
-        );
+        MatchPageBinding().dependencies();
+        return MatchPage(tabController: _tabController);
 
       case TabEnums.search:
         return const Center(

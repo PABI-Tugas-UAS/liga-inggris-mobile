@@ -58,6 +58,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: BaseBackground(
         child: Center(
           child: SingleChildScrollView(
@@ -87,7 +88,8 @@ class RegisterScreen extends StatelessWidget {
                               child: Text(
                                 'SIGN UP',
                                 style: TextStyle(
-                                    fontSize: 20, fontFamily: 'Poppins'),
+                                    fontSize: 20,
+                                    fontFamily: 'Poppins-Regular'),
                               ),
                             ),
                             _RegisterForm(

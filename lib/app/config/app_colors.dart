@@ -6,10 +6,16 @@ class AppColors {
 
   static Color text = HexColor("FFFFFF");
 
+  static Color appBarTitle = HexColor("A19FA5");
+  static Color appBarBackground = HexColor("0F1012").withOpacity(0.5);
+
   static Color iconActive = HexColor("FFFFFF");
   static Color iconDisabled = HexColor.withOpacity("BDBDBD", 0.4);
 
   static Color cardBackground = HexColor("0F1012").withOpacity(0.35);
+  static Color cardBorder = HexColor("FCFCFC");
+
+  static Color contentSeparator = HexColor("FCFCFC").withOpacity(0.8);
 
   static Color buttonBackground = HexColor('3E2F9A').withOpacity(0.45);
 }

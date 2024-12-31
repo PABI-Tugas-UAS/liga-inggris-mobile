@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
 import 'package:liga_inggris_mobile/services/club/model.dart';
 
 class ClubListWidget extends StatelessWidget {
@@ -19,12 +19,10 @@ class ClubListWidget extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SvgPicture.network(
-                    club.logo!,
+                  ClubLogoWidget(
+                    imageUrl: club.logo!,
                     width: 100,
                     height: 100,
-                    placeholderBuilder: (context) =>
-                        const CircularProgressIndicator(),
                   ),
                   Text(club.name ?? 'Unknown Club'),
                 ],

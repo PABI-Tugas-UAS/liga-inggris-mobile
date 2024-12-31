@@ -10,15 +10,19 @@ class AuthController extends GetxController {
 
   @override
   void onInit() async {
+    print("!!! init");
     super.onInit();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isLoggedIn.value = prefs.getBool('isLoggedIn') ?? false;
 
-    if (isLoggedIn.value) {
+    // TODO: remove "|| true" on production
+    if (isLoggedIn.value || true) {
       Get.offNamed('/');
     } else {
       Get.offNamed('/signin');
     }
+
+    Get.delete();
   }
 
   Future<void> login(String email, String password) async {
@@ -30,6 +34,7 @@ class AuthController extends GetxController {
       await prefs.setString('email', email);
       isLoggedIn.value = true;
       Get.toNamed('/');
+      Get.delete();
     } else {
       Get.snackbar(
         "Login Gagal",
@@ -45,5 +50,6 @@ class AuthController extends GetxController {
     await prefs.clear();
     isLoggedIn.value = false;
     Get.toNamed('/signin');
+    Get.delete();
   }
 }

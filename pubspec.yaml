@@ -25,7 +25,21 @@ flutter:
   uses-material-design: true
   assets:
     - .env
+    - assets/
   fonts:
-    - family: Poppins
+    - family: Poppins-Regular
       fonts:
-        - asset: fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Regular.ttf
+    - family: Poppins-ExtraBoldItalic
+      fonts:
+        - asset: assets/fonts/Poppins-ExtraBoldItalic.ttf
+    - family: Poppins-LightItalic
+      fonts:
+        - asset: assets/fonts/Poppins-LightItalic.ttf
+    - family: Poppins-SemiBold
+      fonts:
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+    - family: Poppins-Light
+      fonts:
+        - asset: assets/fonts/Poppins-Light.ttf
+

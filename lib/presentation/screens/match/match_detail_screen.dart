@@ -1,0 +1,200 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:liga_inggris_mobile/app/config/app_colors.dart';
+import 'package:liga_inggris_mobile/app/consts/match_const.dart';
+import 'package:liga_inggris_mobile/app/controllers/match/match_controller.dart';
+import 'package:liga_inggris_mobile/app/enums/match_details_tab_enum.dart';
+import 'package:liga_inggris_mobile/app/utils/time_convert.dart';
+import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
+import 'package:liga_inggris_mobile/presentation/common/custom_screen_layout.dart';
+import 'package:liga_inggris_mobile/services/match/model.dart';
+
+class MatchDetailScreen extends GetView<MatchController> {
+  final String matchId;
+
+  MatchDetailScreen({super.key, required this.matchId});
+
+  final RxInt contentTabIndex = 0.obs;
+
+  void setContentTabIndex(int index) {
+    contentTabIndex.value = index;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomScreenLayout(
+      goBackTitle: "Match List",
+      children: [
+        Obx(() {
+          if (controller.isMatchDetailsLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (controller.matchDetails.value == null) {
+            return const Center(child: Text('Failed to load match details'));
+          }
+
+          return Column(
+            children: [
+              _screenContent(),
+              _screenTabBar(setContentTabIndex),
+              Obx(() => _screenContentTab(contentTabIndex.value)),
+            ],
+          );
+        }),
+      ],
+    );
+  }
+
+  Widget _screenContent() {
+    final matchDetails = controller.matchDetails.value!;
+    return Column(
+      children: [
+        // top subtitle
+        Row(
+          children: [
+            if (MatchStatus.current == matchDetails.status)
+              Row(
+                children: [
+                  Container(
+                    width: 10,
+                    height: 10,
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  const Text("LIVE"),
+                  const SizedBox(width: 12),
+                ],
+              ),
+            Text(
+              "at ${convertToWIB(matchDetails.time)}, ${matchDetails.location}",
+            ),
+          ],
+        ),
+
+        // main title
+        Container(
+          padding: const EdgeInsets.only(top: 8),
+          alignment: Alignment.centerLeft,
+          child: Text(
+            "${matchDetails.homeClub.name} vs ${matchDetails.awayClub.name}",
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 24),
+
+        // logo and score
+        Container(
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                color: AppColors.contentSeparator,
+              ),
+              bottom: BorderSide(
+                color: AppColors.contentSeparator,
+              ),
+            ),
+          ),
+          padding: const EdgeInsets.only(top: 28, bottom: 28),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ClubLogoWidget(
+                imageUrl: matchDetails.homeClub.logo!,
+                width: 100,
+                height: 100,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  "${matchDetails.homeScore} - ${matchDetails.awayScore}",
+                  style: const TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              ClubLogoWidget(
+                imageUrl: matchDetails.awayClub.logo!,
+                width: 100,
+                height: 100,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _screenTabBar(Function(int) onTap) {
+    return Obx(
+      () => CupertinoTabBar(
+        onTap: (value) => onTap(value),
+        currentIndex: contentTabIndex.value,
+        backgroundColor: AppColors.primary,
+        activeColor: AppColors.iconActive,
+        inactiveColor: AppColors.iconDisabled,
+        border: Border(
+          bottom: BorderSide(
+            color: AppColors.contentSeparator,
+          ),
+        ),
+        items: [
+          for (final tab in MatchDetailsTabEnums.values)
+            BottomNavigationBarItem(
+              icon: Text(
+                tab.title,
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _screenContentTab(int index) {
+    switch (MatchDetailsTabEnums.values[index]) {
+      case MatchDetailsTabEnums.timeline:
+        return _tabContentTimeline();
+      case MatchDetailsTabEnums.stats:
+        return _tabContentStats();
+      case MatchDetailsTabEnums.lineUp:
+        return _tabContentLineUp();
+    }
+  }
+
+  Widget _tabContentTimeline() {
+    final matchDetails = controller.matchDetails.value!;
+    return const Column(
+      children: [
+        Text("Timeline"),
+      ],
+    );
+  }
+
+  Widget _tabContentStats() {
+    return const Column(
+      children: [
+        Text("Stats"),
+      ],
+    );
+  }
+
+  Widget _tabContentLineUp() {
+    return const Column(
+      children: [
+        Text("Line Up"),
+      ],
+    );
+  }
+}
