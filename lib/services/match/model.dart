@@ -48,6 +48,7 @@ class MatchDetailModel {
   final String time;
   final String location;
   final String status;
+  final MatchStatsModel matchStats;
 
   MatchDetailModel({
     required this.id,
@@ -59,6 +60,7 @@ class MatchDetailModel {
     required this.time,
     required this.location,
     required this.status,
+    required this.matchStats,
   });
 
   factory MatchDetailModel.fromJson(Map<String, dynamic> json) {
@@ -72,6 +74,70 @@ class MatchDetailModel {
       time: json['time'],
       location: json['location'],
       status: json['status'],
+      matchStats: MatchStatsModel.fromJson(json['match_stats']),
+    );
+  }
+}
+
+class StatsModel {
+  final int home;
+  final int away;
+
+  StatsModel({
+    required this.home,
+    required this.away,
+  });
+
+  factory StatsModel.fromJson(Map<String, dynamic> json) {
+    return StatsModel(
+      home: json['home'],
+      away: json['away'],
+    );
+  }
+}
+
+class MatchStatsModel {
+  final int id;
+  final int matchId;
+  final Map<String, StatsModel> stats;
+  final List<TimelineModel> timeline;
+
+  MatchStatsModel({
+    required this.id,
+    required this.matchId,
+    required this.stats,
+    required this.timeline,
+  });
+
+  factory MatchStatsModel.fromJson(Map<String, dynamic> json) {
+    return MatchStatsModel(
+      id: json['id'],
+      matchId: json['match_id'],
+      stats: (json['stats'] as Map<String, dynamic>)
+          .map((key, value) => MapEntry(key, StatsModel.fromJson(value))),
+      timeline: (json['timeline'] as List<dynamic>)
+          .map((e) => TimelineModel.fromJson(e))
+          .toList(),
+    );
+  }
+}
+
+class TimelineModel {
+  final String description;
+  final int minute;
+  final String team;
+
+  TimelineModel({
+    required this.description,
+    required this.minute,
+    required this.team,
+  });
+
+  factory TimelineModel.fromJson(Map<String, dynamic> json) {
+    return TimelineModel(
+      description: json['description'],
+      minute: json['minute'],
+      team: json['team'],
     );
   }
 }

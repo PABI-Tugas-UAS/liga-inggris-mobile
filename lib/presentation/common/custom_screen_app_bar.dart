@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; // Add GetX package import
+import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/config/app_colors.dart';
 
 class CustomScreenAppBar extends StatelessWidget
