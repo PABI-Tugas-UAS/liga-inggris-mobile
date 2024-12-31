@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/config/app_colors.dart';
+import 'package:liga_inggris_mobile/app/controllers/match/match_controller.dart';
 import 'package:liga_inggris_mobile/app/utils/date_convert.dart';
+import 'package:liga_inggris_mobile/app/utils/time_convert.dart';
+import 'package:liga_inggris_mobile/presentation/common/clickable_card_widget.dart';
 import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
 import 'package:liga_inggris_mobile/services/match/model.dart';
 
@@ -9,9 +13,15 @@ class MatchCardWidget extends StatelessWidget {
 
   const MatchCardWidget({super.key, required this.match});
 
+  void _handleTapCard() {
+    Get.toNamed('/match/${match.id}');
+    Get.find<MatchController>().fetchMatchDetails(match.id.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return ClickableCard(
+      onTap: _handleTapCard,
       color: AppColors.cardBackground,
       shape: RoundedRectangleBorder(
         side: BorderSide(color: AppColors.cardBorder),
@@ -106,7 +116,7 @@ class MatchCardWidget extends StatelessWidget {
 
               // jam pertandingan
               Text(
-                "${match.time.substring(0, match.time.length - 3)} WIB",
+                convertToWIB(match.time),
                 style: const TextStyle(fontSize: 16.0),
               ),
             ],

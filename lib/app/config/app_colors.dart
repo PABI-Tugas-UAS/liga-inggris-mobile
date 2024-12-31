@@ -15,5 +15,7 @@ class AppColors {
   static Color cardBackground = HexColor("0F1012").withOpacity(0.35);
   static Color cardBorder = HexColor("FCFCFC");
 
+  static Color contentSeparator = HexColor("FCFCFC").withOpacity(0.8);
+
   static Color buttonBackground = HexColor('3E2F9A').withOpacity(0.45);
 }

@@ -5,6 +5,7 @@ import 'package:liga_inggris_mobile/presentation/initial_binding.dart';
 import 'package:liga_inggris_mobile/presentation/pages/layout.dart';
 import 'package:liga_inggris_mobile/presentation/screens/auth/register_screen.dart';
 import 'package:liga_inggris_mobile/presentation/screens/auth/signin_screen.dart';
+import 'package:liga_inggris_mobile/presentation/screens/match/match_detail_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -26,10 +27,15 @@ class App extends StatelessWidget {
           name: '/signin',
           page: () => SignInScreen(),
         ),
-
         GetPage(
           name: '/register',
           page: () => RegisterScreen(),
+        ),
+        GetPage(
+          name: '/match/:matchId',
+          page: () => MatchDetailScreen(
+            matchId: Get.parameters['matchId']!,
+          ),
         ),
       ],
       localizationsDelegates: const [

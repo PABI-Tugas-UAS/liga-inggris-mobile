@@ -4,12 +4,24 @@ import 'package:liga_inggris_mobile/services/match/service.dart';
 
 class MatchController extends GetxController {
   MatchController();
-  final MatchService _matchService = MatchService();
 
+  final MatchService _matchService = MatchService();
   var matches = RxList<MatchModel>([]);
   var isMatchesLoading = false.obs;
   var matchDetails = Rxn<MatchDetailModel>();
   var isMatchDetailsLoading = false.obs;
+
+  String? matchId;
+
+  MatchController.withMatchId(this.matchId);
+
+  @override
+  void onInit() {
+    super.onInit();
+    if (matchId != null) {
+      fetchMatchDetails(matchId!);
+    }
+  }
 
   Future<void> fetchMatches() async {
     isMatchesLoading(true);
@@ -29,6 +41,7 @@ class MatchController extends GetxController {
   }
 
   Future<void> fetchMatchDetails(String matchId) async {
+    print("!!!!!!!! fetchMatchDetails $matchId");
     matchDetails(null);
     isMatchDetailsLoading(true);
     final res = await _matchService.getMatchById(matchId);
