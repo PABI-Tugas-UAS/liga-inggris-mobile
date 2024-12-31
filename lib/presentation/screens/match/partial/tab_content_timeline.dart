@@ -24,7 +24,7 @@ class TabContentTimeline extends StatelessWidget {
 
   Widget _timelineItem(TimelineModel timeline) {
     return Container(
-      height: 50,
+      height: 60,
       padding: const EdgeInsets.only(left: 8, right: 8),
       decoration: const BoxDecoration(
         border: Border(
