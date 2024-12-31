@@ -41,11 +41,11 @@ class _LayoutPageState extends State<LayoutPage> {
   Widget _buildTabContent(TabEnums type) {
     switch (type) {
       case TabEnums.home:
-        HomeBinding().dependencies();
+        HomePageBinding().dependencies();
         return HomePage(tabController: _tabController);
 
       case TabEnums.matches:
-        MatchBinding().dependencies();
+        MatchPageBinding().dependencies();
         return MatchPage(tabController: _tabController);
 
       case TabEnums.search:
