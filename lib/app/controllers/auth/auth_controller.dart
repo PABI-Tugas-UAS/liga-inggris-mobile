@@ -10,11 +10,13 @@ class AuthController extends GetxController {
 
   @override
   void onInit() async {
+    print("!!! init");
     super.onInit();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isLoggedIn.value = prefs.getBool('isLoggedIn') ?? false;
 
-    if (isLoggedIn.value) {
+    // TODO: remove "|| true" on production
+    if (isLoggedIn.value || true) {
       Get.offNamed('/');
     } else {
       Get.offNamed('/signin');

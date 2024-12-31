@@ -11,11 +11,12 @@ class SignInScreen extends GetView<AuthController> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final AuthController _authController = Get.find<AuthController>();
 
   void _handleLogin() {
     final email = _emailController.text;
     final password = _passwordController.text;
-    Get.find<AuthController>().login(email, password);
+    _authController.login(email, password);
   }
 
   void _handleRegister() {
