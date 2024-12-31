@@ -54,8 +54,8 @@ class SignInScreen extends GetView<AuthController> {
                           padding: EdgeInsets.only(top: 8, bottom: 24),
                           child: Text(
                             'SIGN IN',
-                            style:
-                                TextStyle(fontSize: 20, fontFamily: 'Poppins'),
+                            style: TextStyle(
+                                fontSize: 20, fontFamily: 'Poppins-Regular'),
                           ),
                         ),
                         _SignInForm(
@@ -78,7 +78,7 @@ class SignInScreen extends GetView<AuthController> {
                               padding: EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
                                 "or",
-                                style: TextStyle(fontFamily: 'Poppins'),
+                                style: TextStyle(fontFamily: 'Poppins-Regular'),
                               ),
                             ),
                             Expanded(

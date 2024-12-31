@@ -55,21 +55,22 @@ class InputFieldState extends State<InputField> {
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
               widget.label!,
-              style:
-                  const TextStyle(fontFamily: 'Poppins', color: Colors.white),
+              style: const TextStyle(
+                  fontFamily: 'Poppins-Regular', color: Colors.white),
             ),
           ),
         TextFormField(
           focusNode: _focusNode,
           controller: widget.controller,
-          style: const TextStyle(color: Colors.white, fontFamily: 'Poppins'),
+          style: const TextStyle(
+              color: Colors.white, fontFamily: 'Poppins-Regular'),
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(horizontal: 20),
             hintText: widget.hintText,
             hintStyle: const TextStyle(color: Colors.grey),
             labelText: widget.labelText,
-            labelStyle:
-                const TextStyle(color: Colors.grey, fontFamily: 'Poppins'),
+            labelStyle: const TextStyle(
+                color: Colors.grey, fontFamily: 'Poppins-Regular'),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
             ),

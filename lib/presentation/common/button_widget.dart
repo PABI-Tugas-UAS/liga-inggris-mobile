@@ -25,7 +25,7 @@ Widget button({
       ),
       child: Text(
         label,
-        style: const TextStyle(fontSize: 16, fontFamily: 'Poppins'),
+        style: const TextStyle(fontSize: 16, fontFamily: 'Poppins-Regular'),
       ),
     ),
   );

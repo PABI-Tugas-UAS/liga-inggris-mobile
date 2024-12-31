@@ -88,7 +88,8 @@ class RegisterScreen extends StatelessWidget {
                               child: Text(
                                 'SIGN UP',
                                 style: TextStyle(
-                                    fontSize: 20, fontFamily: 'Poppins'),
+                                    fontSize: 20,
+                                    fontFamily: 'Poppins-Regular'),
                               ),
                             ),
                             _RegisterForm(
