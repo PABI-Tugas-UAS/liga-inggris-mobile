@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/presentation/initial_binding.dart';
 import 'package:liga_inggris_mobile/presentation/pages/layout.dart';
-import 'package:liga_inggris_mobile/presentation/screens/auth/register.dart';
-import 'package:liga_inggris_mobile/presentation/screens/auth/signin.dart';
+import 'package:liga_inggris_mobile/presentation/screens/auth/register_screen.dart';
+import 'package:liga_inggris_mobile/presentation/screens/auth/signin_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
