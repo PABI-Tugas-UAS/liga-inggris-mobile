@@ -22,7 +22,10 @@ class CustomScreenLayout extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       body: BaseBackground(
         child: DefaultTextStyle(
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(
+            color: Colors.white,
+            fontFamily: 'Poppins-Regular',
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(

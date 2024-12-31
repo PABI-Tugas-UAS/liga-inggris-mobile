@@ -18,7 +18,10 @@ class CustomPageLayout extends StatelessWidget {
       backgroundColor: Colors.transparent,
       resizeToAvoidBottomInset: true,
       body: DefaultTextStyle(
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(
+          color: Colors.white,
+          fontFamily: 'Poppins-Regular',
+        ),
         child: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
           child: Row(
