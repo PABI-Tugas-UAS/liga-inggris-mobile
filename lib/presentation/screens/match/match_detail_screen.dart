@@ -43,7 +43,7 @@ class MatchDetailScreen extends GetView<MatchController> {
               Obx(
                 () => SizedBox(
                   height: Get.height * 0.5,
-                  child: _screenContentTab(contentTabIndex.value),
+                  child: _screenTabContent(contentTabIndex.value),
                 ),
               ),
             ],
@@ -170,7 +170,7 @@ class MatchDetailScreen extends GetView<MatchController> {
     );
   }
 
-  Widget _screenContentTab(int index) {
+  Widget _screenTabContent(int index) {
     switch (MatchDetailsTabEnums.values[index]) {
       case MatchDetailsTabEnums.timeline:
         return _tabContentTimeline();
