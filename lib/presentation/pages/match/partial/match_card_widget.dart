@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/config/app_colors.dart';
-import 'package:liga_inggris_mobile/app/controllers/match/match_controller.dart';
 import 'package:liga_inggris_mobile/app/utils/date_convert.dart';
 import 'package:liga_inggris_mobile/app/utils/time_convert.dart';
 import 'package:liga_inggris_mobile/presentation/common/clickable_card_widget.dart';
 import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
+import 'package:liga_inggris_mobile/presentation/controllers/match/match_page_controller.dart';
 import 'package:liga_inggris_mobile/services/match/model.dart';
 
-class MatchCardWidget extends StatelessWidget {
+class MatchCardWidget extends GetView<MatchPageController> {
   final MatchModel match;
 
   const MatchCardWidget({super.key, required this.match});
 
   void _handleTapCard() {
-    Get.toNamed('/match/${match.id}');
-    Get.find<MatchController>().fetchMatchDetails(match.id.toString());
+    controller.goToMatchDetail(match.id);
   }
 
   @override

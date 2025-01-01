@@ -8,14 +8,15 @@ import 'package:liga_inggris_mobile/app/enums/match_details_tab_enum.dart';
 import 'package:liga_inggris_mobile/app/utils/time_convert.dart';
 import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
 import 'package:liga_inggris_mobile/presentation/common/custom_screen_layout.dart';
-import 'package:liga_inggris_mobile/services/match/model.dart';
+import 'package:liga_inggris_mobile/presentation/screens/match/partial/tab_content_lineup.dart';
+import 'package:liga_inggris_mobile/presentation/screens/match/partial/tab_content_stats.dart';
+import 'package:liga_inggris_mobile/presentation/screens/match/partial/tab_content_timeline.dart';
 
 class MatchDetailScreen extends GetView<MatchController> {
   final String matchId;
+  final RxInt contentTabIndex = 0.obs;
 
   MatchDetailScreen({super.key, required this.matchId});
-
-  final RxInt contentTabIndex = 0.obs;
 
   void setContentTabIndex(int index) {
     contentTabIndex.value = index;
@@ -39,7 +40,12 @@ class MatchDetailScreen extends GetView<MatchController> {
             children: [
               _screenContent(),
               _screenTabBar(setContentTabIndex),
-              Obx(() => _screenContentTab(contentTabIndex.value)),
+              Obx(
+                () => SizedBox(
+                  height: Get.height * 0.5,
+                  child: _screenTabContent(contentTabIndex.value),
+                ),
+              ),
             ],
           );
         }),
@@ -103,9 +109,11 @@ class MatchDetailScreen extends GetView<MatchController> {
               ),
             ),
           ),
-          padding: const EdgeInsets.only(top: 28, bottom: 28),
+          padding:
+              const EdgeInsets.only(top: 28, bottom: 28, left: 20, right: 20),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ClubLogoWidget(
                 imageUrl: matchDetails.homeClub.logo!,
@@ -162,7 +170,7 @@ class MatchDetailScreen extends GetView<MatchController> {
     );
   }
 
-  Widget _screenContentTab(int index) {
+  Widget _screenTabContent(int index) {
     switch (MatchDetailsTabEnums.values[index]) {
       case MatchDetailsTabEnums.timeline:
         return _tabContentTimeline();
@@ -174,27 +182,20 @@ class MatchDetailScreen extends GetView<MatchController> {
   }
 
   Widget _tabContentTimeline() {
-    final matchDetails = controller.matchDetails.value!;
-    return const Column(
-      children: [
-        Text("Timeline"),
-      ],
-    );
+    final matchTimeline = controller.matchDetails.value!.matchStats.timeline;
+    return TabContentTimeline(matchTimeline: matchTimeline);
   }
 
   Widget _tabContentStats() {
-    return const Column(
-      children: [
-        Text("Stats"),
-      ],
-    );
+    final matchStats = controller.matchDetails.value!.matchStats.stats;
+    return TabContentStats(matchStats: matchStats);
   }
 
   Widget _tabContentLineUp() {
-    return const Column(
-      children: [
-        Text("Line Up"),
-      ],
+    final matchDetails = controller.matchDetails.value!;
+    return TabContentLineup(
+      homeClubId: matchDetails.homeClub.id!,
+      awayClubId: matchDetails.awayClub.id!,
     );
   }
 }

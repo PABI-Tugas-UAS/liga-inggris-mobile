@@ -22,29 +22,21 @@ class CustomScreenLayout extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       body: BaseBackground(
         child: DefaultTextStyle(
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(
+            color: Colors.white,
+            fontFamily: 'Poppins-Regular',
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: MediaQuery.of(context).size.height,
-                        minWidth: MediaQuery.of(context).size.width,
-                      ),
-                      child: IntrinsicHeight(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            _buildTitle(),
-                            ...children,
-                          ],
-                        ),
-                      ),
-                    ),
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: [
+                      _buildTitle(),
+                      ...children,
+                    ],
                   ),
                 ),
               ],

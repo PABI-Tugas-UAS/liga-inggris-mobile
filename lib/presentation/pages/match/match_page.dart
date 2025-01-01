@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/presentation/common/custom_page_layout.dart';
-import 'package:liga_inggris_mobile/presentation/controllers/match/match_controller.dart';
+import 'package:liga_inggris_mobile/presentation/controllers/match/match_page_controller.dart';
 import 'package:liga_inggris_mobile/presentation/pages/match/partial/match_card_widget.dart';
 
 class MatchPage extends GetView<MatchPageController> {
