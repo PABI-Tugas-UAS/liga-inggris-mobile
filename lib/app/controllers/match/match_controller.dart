@@ -11,18 +11,6 @@ class MatchController extends GetxController {
   var matchDetails = Rxn<MatchDetailModel>();
   var isMatchDetailsLoading = false.obs;
 
-  String? matchId;
-
-  MatchController.withMatchId(this.matchId);
-
-  @override
-  void onInit() {
-    super.onInit();
-    if (matchId != null) {
-      fetchMatchDetails(matchId!);
-    }
-  }
-
   Future<void> fetchMatches() async {
     isMatchesLoading(true);
     final res = await _matchService.getMatches();

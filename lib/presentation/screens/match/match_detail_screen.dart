@@ -8,15 +8,15 @@ import 'package:liga_inggris_mobile/app/enums/match_details_tab_enum.dart';
 import 'package:liga_inggris_mobile/app/utils/time_convert.dart';
 import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
 import 'package:liga_inggris_mobile/presentation/common/custom_screen_layout.dart';
+import 'package:liga_inggris_mobile/presentation/screens/match/partial/tab_content_lineup.dart';
 import 'package:liga_inggris_mobile/presentation/screens/match/partial/tab_content_stats.dart';
 import 'package:liga_inggris_mobile/presentation/screens/match/partial/tab_content_timeline.dart';
 
 class MatchDetailScreen extends GetView<MatchController> {
   final String matchId;
+  final RxInt contentTabIndex = 0.obs;
 
   MatchDetailScreen({super.key, required this.matchId});
-
-  final RxInt contentTabIndex = 0.obs;
 
   void setContentTabIndex(int index) {
     contentTabIndex.value = index;
