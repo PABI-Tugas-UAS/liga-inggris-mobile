@@ -192,10 +192,10 @@ class MatchDetailScreen extends GetView<MatchController> {
   }
 
   Widget _tabContentLineUp() {
-    return const Column(
-      children: [
-        Text("Line Up"),
-      ],
+    final matchDetails = controller.matchDetails.value!;
+    return TabContentLineup(
+      homeClubId: matchDetails.homeClub.id!,
+      awayClubId: matchDetails.awayClub.id!,
     );
   }
 }

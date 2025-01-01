@@ -12,6 +12,9 @@ class AppColors {
   static Color iconActive = HexColor("FFFFFF");
   static Color iconDisabled = HexColor.withOpacity("BDBDBD", 0.4);
 
+  static Color toggleActive = HexColor("281E63");
+  static Color toggleInactive = HexColor("131027");
+
   static Color cardBackground = HexColor("0F1012").withOpacity(0.35);
   static Color cardBorder = HexColor("FCFCFC");
 

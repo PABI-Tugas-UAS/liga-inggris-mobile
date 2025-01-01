@@ -15,6 +15,7 @@ class MatchPageController extends GetxController {
 
   void goToMatchDetail(int matchId) {
     matchController.fetchMatchDetails(matchId.toString());
+    playerController.fetchPlayers(clubId: "1");
 
     Get.toNamed('/match/$matchId');
   }

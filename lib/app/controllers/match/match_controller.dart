@@ -12,6 +12,7 @@ class MatchController extends GetxController {
   var isMatchDetailsLoading = false.obs;
 
   Future<void> fetchMatches() async {
+    matches.clear();
     isMatchesLoading(true);
     final res = await _matchService.getMatches();
 
@@ -29,7 +30,6 @@ class MatchController extends GetxController {
   }
 
   Future<void> fetchMatchDetails(String matchId) async {
-    print("!!!!!!!! fetchMatchDetails $matchId");
     matchDetails(null);
     isMatchDetailsLoading(true);
     final res = await _matchService.getMatchById(matchId);
