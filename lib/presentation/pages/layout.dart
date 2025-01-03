@@ -51,9 +51,6 @@ class _LayoutPageState extends State<LayoutPage> {
         return MatchPage(tabController: _tabController);
 
       case TabEnums.search:
-        // return const Center(
-        //   child: Text('Search'),
-        // );
         SearchPageBinding().dependencies();
         return SearchPage(tabController: _tabController);
         

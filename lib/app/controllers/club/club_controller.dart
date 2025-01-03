@@ -4,10 +4,17 @@ import 'package:liga_inggris_mobile/services/club/service.dart';
 
 class ClubController extends GetxController {
   ClubController();
-  final ClubService _clubService = ClubService();
 
+  final ClubService _clubService = ClubService();
   var isLoading = false.obs;
   var clubs = RxList<ClubModel>([]);
+  var filteredClubs = RxList<ClubModel>([]);
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchClubs();
+  }
 
   Future<void> fetchClubs() async {
     isLoading(true);
@@ -15,14 +22,26 @@ class ClubController extends GetxController {
 
     if (res.isSuccess) {
       clubs.assignAll(res.data ?? []);
+      filteredClubs.assignAll(res.data ?? []);
     } else {
       Get.snackbar(
-        'Applications by ID',
+        'Clubs',
         res.errMessage ?? 'Failed to fetch clubs',
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
       );
     }
-    print("fetchClubs !!!!!!!!!!!!!!");
     isLoading(false);
+  }
+
+  void filterClubs(String searchTerm) {
+    if (searchTerm.isEmpty) {
+      filteredClubs.assignAll(clubs);
+    } else {
+      filteredClubs.assignAll(
+        clubs.where((club) => 
+        club.name?.toLowerCase().contains(searchTerm.toLowerCase()) 
+        ?? false),
+      );
+    }
   }
 }
