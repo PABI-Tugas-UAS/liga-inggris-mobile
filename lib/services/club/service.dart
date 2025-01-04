@@ -8,13 +8,25 @@ class ClubService extends BaseService {
     final response = await get('/clubs', queryParams: params);
 
     if (response.success) {
-      final List<ClubModel> clubs = [];
-
-      for (final item in response.data) {
-        clubs.add(ClubModel.fromJson(item));
-      }
-
+      final List<ClubModel> clubs = response.data.map<ClubModel>((item) => ClubModel.fromJson(item)).toList();
       return ServiceResult.success(clubs);
+    } else {
+      return ServiceResult.failure(response.message);
+    }
+  }
+
+  Future<ServiceResult<ClubModel>> getClubByName(String name) async {
+    final response = await get('/clubs?name=$name');
+
+    if (response.success) {
+      final data = response.data;
+      if (data is List && data.isNotEmpty) {
+        final clubData = data[0] as Map<String, dynamic>;
+        final ClubModel club = ClubModel.fromJson(clubData);
+        return ServiceResult.success(club);
+      } else {
+        return ServiceResult.failure('Club not found');
+      }
     } else {
       return ServiceResult.failure(response.message);
     }
