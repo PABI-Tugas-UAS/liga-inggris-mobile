@@ -14,6 +14,12 @@ class SearchPageController extends GetxController {
     Future.microtask(() => clubController.fetchClubs());
   }
 
+  @override
+  void onClose() {
+    _debounce?.cancel();
+    super.onClose();
+  }
+
   void onSearchChanged(String query) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
 
@@ -26,9 +32,10 @@ class SearchPageController extends GetxController {
     });
   }
 
-  @override
-  void onClose() {
-    _debounce?.cancel();
-    super.onClose();
+  void goToClubDetail(int clubId) {
+    // TODO: bikin kayak match_page_controller, fungsi redirect ke detail club screen
+    // clubController.fetchClubDetails(clubId.toString());
+
+    Get.toNamed('/clubs/$clubId');
   }
 }
