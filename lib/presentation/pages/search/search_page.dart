@@ -20,7 +20,7 @@ class SearchPage extends GetView<SearchPageController> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextField(
-                  onChanged: (value) => controller.clubController.fetchClubs(params: {'name': value}),
+                  onChanged: (value) => controller.onSearchChanged(value),
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'Search Club',
