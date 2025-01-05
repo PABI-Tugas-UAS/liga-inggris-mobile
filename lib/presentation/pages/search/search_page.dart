@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/presentation/common/custom_page_layout.dart';
 import 'package:liga_inggris_mobile/presentation/controllers/search/search_page_controller.dart';
 import 'package:liga_inggris_mobile/presentation/pages/search/partial/search_card_widget.dart';
-import 'package:liga_inggris_mobile/services/club/model.dart';
 
 class SearchPage extends GetView<SearchPageController> {
   final CupertinoTabController tabController;
@@ -21,7 +20,7 @@ class SearchPage extends GetView<SearchPageController> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextField(
-                  onChanged: controller.clubController.searchClubs,
+                  onChanged: (value) => controller.clubController.fetchClubs(params: {'name': value}),
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'Search Club',
