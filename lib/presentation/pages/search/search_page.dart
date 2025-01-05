@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/presentation/common/custom_page_layout.dart';
 import 'package:liga_inggris_mobile/presentation/controllers/search/search_page_controller.dart';
-import 'package:liga_inggris_mobile/presentation/pages/search/partial/search_card_widget.dart';
+import 'package:liga_inggris_mobile/presentation/pages/search/partial/list_club_widget.dart';
 
 class SearchPage extends GetView<SearchPageController> {
   final CupertinoTabController tabController;
@@ -18,21 +18,21 @@ class SearchPage extends GetView<SearchPageController> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.only(left: 12, right: 12, bottom: 8),
                 child: TextField(
                   onChanged: (value) => controller.onSearchChanged(value),
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'Search Club',
-                    hintStyle: const TextStyle(color: Colors.white),
+                    hintStyle: const TextStyle(color: Colors.grey),
                     filled: true,
                     fillColor: Colors.transparent,
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                     prefixIcon: const Icon(Icons.search, color: Colors.white),
@@ -43,7 +43,7 @@ class SearchPage extends GetView<SearchPageController> {
                 if (controller.clubController.isLoading.value) {
                   return const CircularProgressIndicator();
                 }
-                return SearchCardWidget(clubs: controller.clubController.clubs);
+                return ListClubWidget(clubs: controller.clubController.clubs);
               }),
             ],
           ),

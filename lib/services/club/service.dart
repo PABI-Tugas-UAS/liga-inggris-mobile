@@ -8,7 +8,12 @@ class ClubService extends BaseService {
     final response = await get('/clubs', queryParams: params);
 
     if (response.success) {
-      final List<ClubModel> clubs = response.data.map<ClubModel>((item) => ClubModel.fromJson(item)).toList();
+      final List<ClubModel> clubs = [];
+
+      for (final item in response.data) {
+        clubs.add(ClubModel.fromJson(item));
+      }
+
       return ServiceResult.success(clubs);
     } else {
       return ServiceResult.failure(response.message);

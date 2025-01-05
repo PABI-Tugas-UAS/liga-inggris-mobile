@@ -12,8 +12,8 @@ class ClubController extends GetxController {
   var searchClub = Rxn<ClubModel>();
 
   Future<void> fetchClubs({QueryParams? params}) async {
-    clubs.clear();
     isLoading(true);
+    clubs.clear();
     final res = await _clubService.getClubs(params: params);
 
     if (res.isSuccess) {
