@@ -32,4 +32,21 @@ class MatchService extends BaseService {
       return ServiceResult.failure(response.message);
     }
   }
+
+  Future<ServiceResult<List<MatchModel>>> getCurrentMatches(
+      {QueryParams? params}) async {
+    final response = await get('/matches?status=current', queryParams: params);
+
+    if (response.success) {
+      final List<MatchModel> currentMatches = [];
+
+      for (final item in response.data) {
+        currentMatches.add(MatchModel.fromJson(item));
+      }
+
+      return ServiceResult.success(currentMatches);
+    } else {
+      return ServiceResult.failure(response.message);
+    }
+  }
 }
