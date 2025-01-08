@@ -11,6 +11,13 @@ class HomePage extends GetView<HomeController> {
 
   const HomePage({super.key, required this.tabController});
 
+  void _toSearchScreen() {
+    TabUtils.goToTab(
+      controller: tabController,
+      targetTab: TabEnums.search,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +56,10 @@ class HomePage extends GetView<HomeController> {
               }
 
               // memanggil partial widget
-              return ClubListWidget(clubs: controller.clubController.clubs);
+              return ClubListWidget(
+                clubs: controller.clubController.clubs,
+                onTap: _toSearchScreen,
+              );
             }),
           ],
         ),
