@@ -49,4 +49,21 @@ class MatchService extends BaseService {
       return ServiceResult.failure(response.message);
     }
   }
+
+  Future<ServiceResult<List<MatchModel>>> getUpcomingMatches(
+      {QueryParams? params}) async {
+    final response = await get('/matches?status=upcoming', queryParams: params);
+
+    if (response.success) {
+      final List<MatchModel> upcomingMatches = [];
+
+      for (final item in response.data) {
+        upcomingMatches.add(MatchModel.fromJson(item));
+      }
+
+      return ServiceResult.success(upcomingMatches);
+    } else {
+      return ServiceResult.failure(response.message);
+    }
+  }
 }

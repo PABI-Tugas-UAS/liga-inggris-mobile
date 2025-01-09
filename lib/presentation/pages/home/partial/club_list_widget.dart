@@ -15,7 +15,7 @@ class ClubListWidget extends StatelessWidget {
       children: [
         const Text(
           "Club List",
-          style: TextStyle(color: Colors.white, fontSize: 18),
+          style: TextStyle(fontSize: 18),
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,

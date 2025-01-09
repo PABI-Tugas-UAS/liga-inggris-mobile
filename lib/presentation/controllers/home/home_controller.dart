@@ -14,5 +14,6 @@ class HomeController extends GetxController {
     clubController.fetchClubs();
     clubController.fetchTopClubs();
     matchController.fetchCurrentMatches();
+    matchController.fetchUpcomingMatches();
   }
 }

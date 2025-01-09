@@ -12,6 +12,8 @@ class MatchController extends GetxController {
   var isMatchDetailsLoading = false.obs;
   var currentMatches = RxList<MatchModel>([]);
   var isCurrentMatchesLoading = false.obs;
+  var upcomingMatches = RxList<MatchModel>([]);
+  var isUpcomingMatchesLoading = false.obs;
 
   Future<void> fetchMatches() async {
     matches.clear();
@@ -65,5 +67,23 @@ class MatchController extends GetxController {
     }
 
     isCurrentMatchesLoading(false);
+  }
+
+  Future<void> fetchUpcomingMatches() async {
+    upcomingMatches.clear();
+    isUpcomingMatchesLoading(true);
+    final res = await _matchService.getUpcomingMatches();
+
+    if (res.isSuccess) {
+      upcomingMatches.assignAll(res.data ?? []);
+    } else {
+      Get.snackbar(
+        'Upcoming Matches',
+        res.errMessage ?? 'Failed to fetch upcoming matches',
+        snackPosition: SnackPosition.TOP,
+      );
+    }
+
+    isUpcomingMatchesLoading(false);
   }
 }

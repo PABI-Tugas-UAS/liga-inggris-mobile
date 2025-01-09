@@ -7,7 +7,7 @@ class TopClubWidget extends StatelessWidget {
 
   const TopClubWidget({super.key, required this.topClubs});
 
-  String _getRenkSuffix(int number) {
+  String _getRankSuffix(int number) {
     switch (number) {
       case 1:
         return 'st';
@@ -17,6 +17,18 @@ class TopClubWidget extends StatelessWidget {
         return 'rd';
       default:
         return '';
+    }
+  }
+
+  Color _getRankColor(int index) {
+    if (index == 0) {
+      return Colors.yellowAccent;
+    } else if (index == 1) {
+      return Colors.grey[200]!;
+    } else if (index == 2) {
+      return Colors.deepOrange;
+    } else {
+      return Colors.white;
     }
   }
 
@@ -44,20 +56,20 @@ class TopClubWidget extends StatelessWidget {
                 Positioned(
                   bottom: -5,
                   child: Text(
-                    '${index + 1}${_getRenkSuffix(index + 1)}',
-                    style: const TextStyle(
-                      color: Colors.white,
+                    '${index + 1}${_getRankSuffix(index + 1)}',
+                    style: TextStyle(
+                      color: _getRankColor(index),
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      shadows: [
+                      shadows: const [
                         Shadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 3,
+                          offset: Offset(2, 2),
+                          blurRadius: 1,
                           color: Colors.black,
                         ),
                         Shadow(
-                          offset: Offset(-1, -1),
-                          blurRadius: 3,
+                          offset: Offset(-2, -2),
+                          blurRadius: 1,
                           color: Colors.black,
                         ),
                       ],
