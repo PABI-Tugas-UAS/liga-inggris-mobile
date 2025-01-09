@@ -34,14 +34,14 @@ class UpcommingMatch extends StatelessWidget {
     }
     return Column(
       children: [
-        _firstMatch(upcomingMatch.first),
+        _nextMatch(upcomingMatch.first),
         const SizedBox(height: 4),
         _upcomingMatch(upcomingMatch),
       ],
     );
   }
 
-  Widget _firstMatch(MatchModel match) {
+  Widget _nextMatch(MatchModel match) {
     return Column(
       children: [
         const Text(
@@ -200,7 +200,6 @@ class UpcommingMatch extends StatelessWidget {
     return Container(
       height: 100,
       decoration: BoxDecoration(
-        color: AppColors.cardBackground,
         border: Border.all(
           color: Colors.white,
           width: 2,
