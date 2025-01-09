@@ -16,13 +16,30 @@ class CurrentMatchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (currentMatch.isEmpty) {
+      return const Column(
+        children: [
+          SizedBox(height: 10),
+          Text(
+            "Pertandingan Saat Ini",
+            style: TextStyle(color: Colors.white, fontSize: 24),
+          ),
+          Center(
+            child: Text(
+              "Tidak ada pertandingan",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          ),
+        ],
+      );
+    }
     final match = currentMatch.first;
     return Column(
       children: [
-        const SizedBox(height: 10),
         const Text(
           "Pertandingan Saat Ini",
-          style: TextStyle(color: Colors.white, fontSize: 24),
+          style: TextStyle(
+              color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
         ),
         Stack(
           children: [
@@ -45,92 +62,85 @@ class CurrentMatchWidget extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 8),
                       child: Center(
-                        child: Obx(() {
-                          if (currentMatch.isEmpty) {
-                            return const Text(
-                              "Tidak ada pertandingan",
-                              style: TextStyle(color: Colors.white),
-                            );
-                          }
-
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    width: 100,
-                                    height: 130,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        ClubLogoWidget(
-                                          imageUrl: match.homeClub.logo!,
-                                          width: 80,
-                                          height: 80,
-                                        ),
-                                        const SizedBox(height: 6),
-                                        Text(
-                                          match.homeClub.name!,
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                          ),
-                                          // softWrap: true,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 1,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Text(
-                                    ' ${match.homeScore}  -  ${match.awayScore} ',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                    ),
-                                  ),
-                                  Column(
+                        child: Obx(
+                          () {
+                            if (currentMatch.isEmpty) {
+                              return const Text(
+                                "Tidak ada pertandingan",
+                                style: TextStyle(color: Colors.white),
+                              );
+                            }
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                SizedBox(
+                                  width: 100,
+                                  height: 130,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SizedBox(
-                                        width: 100,
-                                        height: 125,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            ClubLogoWidget(
-                                              imageUrl: match.awayClub.logo!,
-                                              width: 80,
-                                              height: 80,
-                                            ),
-                                            const SizedBox(height: 6),
-                                            Text(
-                                              match.awayClub.name!,
-                                              textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                              ),
-                                              // softWrap: true,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
-                                            ),
-                                          ],
+                                      ClubLogoWidget(
+                                        imageUrl: match.homeClub.logo!,
+                                        width: 80,
+                                        height: 80,
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Text(
+                                        match.homeClub.name!,
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
                                         ),
+                                        // softWrap: true,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
                                       ),
                                     ],
-                                  )
-                                ],
-                              ),
-                            ],
-                          );
-                        }),
+                                  ),
+                                ),
+                                Text(
+                                  ' ${match.homeScore}  -  ${match.awayScore} ',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      width: 100,
+                                      height: 125,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ClubLogoWidget(
+                                            imageUrl: match.awayClub.logo!,
+                                            width: 80,
+                                            height: 80,
+                                          ),
+                                          const SizedBox(height: 6),
+                                          Text(
+                                            match.awayClub.name!,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                            ),
+                                            // softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),

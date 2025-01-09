@@ -6,6 +6,7 @@ import 'package:liga_inggris_mobile/app/utils/tab_utils.dart';
 import 'package:liga_inggris_mobile/presentation/controllers/home/home_controller.dart';
 import 'package:liga_inggris_mobile/presentation/pages/home/partial/club_list_widget.dart';
 import 'package:liga_inggris_mobile/presentation/pages/home/partial/current_match_widget.dart';
+import 'package:liga_inggris_mobile/presentation/pages/home/partial/top_club_widget.dart';
 
 class HomePage extends GetView<HomeController> {
   final CupertinoTabController tabController;
@@ -29,6 +30,7 @@ class HomePage extends GetView<HomeController> {
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: 10),
               Obx(
                 () {
                   if (controller.clubController.isLoading.value) {
@@ -41,16 +43,29 @@ class HomePage extends GetView<HomeController> {
                   );
                 },
               ),
-              const SizedBox(height: 20),
 
-              // untuk data yang perlu di fetch, harus dibungkus obx
+              const SizedBox(height: 28),
+
               Obx(
                 () {
                   if (controller.clubController.isLoading.value) {
                     return const Center(child: Text("Loading..."));
                   }
 
-                  // memanggil partial widget
+                  return TopClubWidget(
+                    topClubs: controller.clubController.topClubs,
+                  );
+                },
+              ),
+
+              const SizedBox(height: 24),
+
+              Obx(
+                () {
+                  if (controller.clubController.isLoading.value) {
+                    return const Center(child: Text("Loading..."));
+                  }
+
                   return ClubListWidget(
                     clubs: controller.clubController.clubs,
                     onTap: _toSearchScreen,

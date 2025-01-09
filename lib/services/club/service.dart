@@ -19,4 +19,21 @@ class ClubService extends BaseService {
       return ServiceResult.failure(response.message);
     }
   }
+
+  Future<ServiceResult<List<ClubModel>>> getTopClubs(
+      {QueryParams? params}) async {
+    final response = await get('/top-clubs', queryParams: params);
+
+    if (response.success) {
+      final List<ClubModel> topClubs = [];
+
+      for (final item in response.data) {
+        topClubs.add(ClubModel.fromJson(item));
+      }
+
+      return ServiceResult.success(topClubs);
+    } else {
+      return ServiceResult.failure(response.message);
+    }
+  }
 }

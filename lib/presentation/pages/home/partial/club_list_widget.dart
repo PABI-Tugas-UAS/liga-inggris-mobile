@@ -13,9 +13,6 @@ class ClubListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 10,
-        ),
         const Text(
           "Club List",
           style: TextStyle(color: Colors.white, fontSize: 18),
@@ -24,29 +21,31 @@ class ClubListWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              ...clubs.map((club) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 4),
-                  child: SizedBox(
-                    height: 62,
-                    width: 62,
-                    child: Container(
-                      margin: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          gradient: AppColors.homeLogoBackground,
-                          shape: BoxShape.circle),
-                      child: Padding(
-                        padding: const EdgeInsets.all(7),
-                        child: ClubLogoWidget(
-                          imageUrl: club.logo!,
-                          width: 40,
-                          height: 40,
+              ...clubs.map(
+                (club) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(vertical: 4),
+                    child: SizedBox(
+                      height: 62,
+                      width: 62,
+                      child: Container(
+                        margin: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                            gradient: AppColors.homeLogoBackground,
+                            shape: BoxShape.circle),
+                        child: Padding(
+                          padding: const EdgeInsets.all(7),
+                          child: ClubLogoWidget(
+                            imageUrl: club.logo!,
+                            width: 40,
+                            height: 40,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                },
+              ),
               SizedBox(
                 height: 62,
                 width: 62,
