@@ -5,12 +5,14 @@ class CustomPageLayout extends StatelessWidget {
   final List<Widget> children;
   final String? title;
   final bool scrollableChild;
+  final Function? onRefresh;
 
   const CustomPageLayout({
     super.key,
     required this.children,
     this.title,
     this.scrollableChild = false,
+    this.onRefresh,
   });
 
   @override
@@ -30,6 +32,15 @@ class CustomPageLayout extends StatelessWidget {
         ),
       ],
     );
+
+    if (onRefresh != null) {
+      content = RefreshIndicator(
+        onRefresh: () async {
+          onRefresh!();
+        },
+        child: content,
+      );
+    }
 
     if (scrollableChild) {
       content = SingleChildScrollView(
