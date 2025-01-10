@@ -26,61 +26,57 @@ class HomePage extends GetView<HomeController> {
     return CustomPageLayout(
       scrollableChild: true,
       children: [
-        SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Obx(
-                  () {
-                    if (controller.clubController.isLoading.value) {
-                      return const Center(child: Text("Loading..."));
-                    }
+        Column(
+          children: [
+            Obx(
+              () {
+                if (controller.clubController.isLoading.value) {
+                  return const Center(child: Text("Loading..."));
+                }
 
-                    return CurrentMatchWidget(
-                      currentMatch: controller.matchController.currentMatches,
-                    );
-                  },
-                ),
-                const SizedBox(height: 28),
-                Obx(
-                  () {
-                    if (controller.clubController.isLoading.value) {
-                      return const Center(child: Text("Loading..."));
-                    }
-
-                    return TopClubWidget(
-                      topClubs: controller.clubController.topClubs,
-                    );
-                  },
-                ),
-                const SizedBox(height: 24),
-                Obx(
-                  () {
-                    if (controller.clubController.isLoading.value) {
-                      return const Center(child: Text("Loading..."));
-                    }
-
-                    return ClubListWidget(
-                      clubs: controller.clubController.clubs,
-                      onTap: _toSearchScreen,
-                    );
-                  },
-                ),
-                const SizedBox(height: 24),
-                Obx(
-                  () {
-                    if (controller.clubController.isLoading.value) {
-                      return const Center(child: Text("Loading..."));
-                    }
-
-                    return UpcomingMatch(
-                      upcomingMatch: controller.matchController.upcomingMatches,
-                    );
-                  },
-                ),
-              ],
+                return CurrentMatchWidget(
+                  currentMatch: controller.matchController.currentMatches,
+                );
+              },
             ),
-          ),
+            const SizedBox(height: 28),
+            Obx(
+              () {
+                if (controller.clubController.isLoading.value) {
+                  return const Center(child: Text("Loading..."));
+                }
+
+                return TopClubWidget(
+                  topClubs: controller.clubController.topClubs,
+                );
+              },
+            ),
+            const SizedBox(height: 24),
+            Obx(
+              () {
+                if (controller.clubController.isLoading.value) {
+                  return const Center(child: Text("Loading..."));
+                }
+
+                return ClubListWidget(
+                  clubs: controller.clubController.clubs,
+                  onTap: _toSearchScreen,
+                );
+              },
+            ),
+            const SizedBox(height: 24),
+            Obx(
+              () {
+                if (controller.clubController.isLoading.value) {
+                  return const Center(child: Text("Loading..."));
+                }
+
+                return UpcomingMatch(
+                  upcomingMatch: controller.matchController.upcomingMatches,
+                );
+              },
+            ),
+          ],
         ),
       ],
     );
