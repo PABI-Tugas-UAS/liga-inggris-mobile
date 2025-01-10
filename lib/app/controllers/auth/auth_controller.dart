@@ -15,8 +15,12 @@ class AuthController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isLoggedIn.value = prefs.getBool('isLoggedIn') ?? false;
 
-    // TODO: remove "|| true" on production
+    // TODO: remove "|| true" amd prefs set on production, only leave Get.offNamed('/signin')
     if (isLoggedIn.value || true) {
+      await prefs.setBool('isLoggedIn', true);
+      await prefs.setString('email', 'fanes@gmail.com');
+      await prefs.setString('user',
+          '{"email": "fanes@gmail.com", "name": "fanas", "password": "***********"}');
       Get.offNamed('/');
     } else {
       Get.offNamed('/signin');
@@ -32,8 +36,8 @@ class AuthController extends GetxController {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isLoggedIn', true);
       await prefs.setString('email', email);
-      await prefs.setString(
-          'user', '{"email": "$email", "username": "${email.split('@')[0]}"}');
+      await prefs.setString('user',
+          '{"email": "$email", "name": "${email.split('@')[0]}", "password": "$password"}');
       isLoggedIn.value = true;
       Get.toNamed('/');
       Get.delete();
