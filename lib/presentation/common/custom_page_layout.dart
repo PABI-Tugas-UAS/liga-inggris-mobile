@@ -17,6 +17,8 @@ class CustomPageLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height - 130;
+
     Widget content = Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,7 +30,14 @@ class CustomPageLayout extends StatelessWidget {
 
     if (scrollableChild) {
       content = SingleChildScrollView(
-        child: content,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: screenHeight,
+          ),
+          child: IntrinsicHeight(
+            child: content,
+          ),
+        ),
       );
     }
 
