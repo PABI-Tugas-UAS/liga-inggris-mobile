@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/presentation/common/custom_page_layout.dart';
+import 'package:liga_inggris_mobile/presentation/controllers/profile/profile_page_controller.dart';
 import 'package:liga_inggris_mobile/presentation/pages/profile/partial/profile_card_widget.dart';
-import 'package:liga_inggris_mobile/presentation/controllers/profile/profile_controller.dart';
 
-class ProfilePage extends GetView<ProfileController> {
+class ProfilePage extends GetView<ProfilePageController> {
   final CupertinoTabController tabController;
 
   const ProfilePage({super.key, required this.tabController});

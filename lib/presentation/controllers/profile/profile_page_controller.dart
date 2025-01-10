@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:liga_inggris_mobile/services/auth/model.dart';
 import 'package:flutter/material.dart';
 
-class ProfileController extends GetxController {
+class ProfilePageController extends GetxController {
   var isProfileLoading = false.obs;
   var photoUrl = ''.obs;
   var handle = ''.obs;
