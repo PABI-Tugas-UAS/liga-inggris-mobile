@@ -32,6 +32,8 @@ class AuthController extends GetxController {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isLoggedIn', true);
       await prefs.setString('email', email);
+      await prefs.setString(
+          'user', '{"email": "$email", "username": "${email.split('@')[0]}"}');
       isLoggedIn.value = true;
       Get.toNamed('/');
       Get.delete();
