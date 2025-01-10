@@ -9,6 +9,7 @@ class ClubController extends GetxController {
   final ClubService _clubService = ClubService();
   var isLoading = false.obs;
   var clubs = RxList<ClubModel>([]);
+  var topClubs = RxList<ClubModel>([]);
   var searchClub = Rxn<ClubModel>();
 
   Future<void> fetchClubs({QueryParams? params}) async {
@@ -22,6 +23,23 @@ class ClubController extends GetxController {
       Get.snackbar(
         'Clubs',
         res.errMessage ?? 'Failed to fetch clubs',
+        snackPosition: SnackPosition.TOP,
+      );
+    }
+    isLoading(false);
+  }
+
+  Future<void> fetchTopClubs() async {
+    isLoading(true);
+    topClubs.clear();
+    final res = await _clubService.getTopClubs();
+
+    if (res.isSuccess) {
+      topClubs.assignAll(res.data ?? []);
+    } else {
+      Get.snackbar(
+        'Top Clubs',
+        res.errMessage ?? 'Failed to fetch top clubs',
         snackPosition: SnackPosition.TOP,
       );
     }

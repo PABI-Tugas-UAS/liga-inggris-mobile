@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/controllers/auth/auth_controller.dart';
 import 'package:liga_inggris_mobile/app/controllers/club/club_controller.dart';
+import 'package:liga_inggris_mobile/app/controllers/match/match_controller.dart';
+import 'package:liga_inggris_mobile/app/controllers/player/player_controller.dart';
 import 'package:liga_inggris_mobile/presentation/controllers/home/home_controller.dart';
 
 class HomePageBinding extends Bindings {
@@ -8,6 +10,8 @@ class HomePageBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(() => AuthController());
     Get.lazyPut(() => ClubController());
+    Get.lazyPut(() => MatchController());
+    Get.lazyPut(() => PlayerController());
     Get.put(HomeController());
   }
 }

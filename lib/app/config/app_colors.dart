@@ -21,4 +21,13 @@ class AppColors {
   static Color contentSeparator = HexColor("FCFCFC").withOpacity(0.8);
 
   static Color buttonBackground = HexColor('3E2F9A').withOpacity(0.45);
+
+  static LinearGradient homeLogoBackground = LinearGradient(
+    colors: [
+      HexColor("3E2F9A"),
+      HexColor("151034"),
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 }
