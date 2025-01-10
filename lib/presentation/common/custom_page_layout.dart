@@ -17,34 +17,30 @@ class CustomPageLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget content = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    Widget content = Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _buildTitle(),
-              ...children,
-            ],
-          ),
-        ),
+        _buildTitle(),
+        ...children,
       ],
     );
+
+    if (scrollableChild) {
+      content = SingleChildScrollView(
+        child: content,
+      );
+    }
 
     if (onRefresh != null) {
       content = RefreshIndicator(
         onRefresh: () async {
           onRefresh!();
         },
-        child: content,
-      );
-    }
-
-    if (scrollableChild) {
-      content = SingleChildScrollView(
-        child: content,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: content,
+        ),
       );
     }
 
