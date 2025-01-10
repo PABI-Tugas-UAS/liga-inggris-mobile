@@ -13,27 +13,24 @@ class ProfilePage extends GetView<ProfilePageController> {
   @override
   Widget build(BuildContext context) {
     return CustomPageLayout(
+      scrollableChild: true,
+      onRefresh: controller.loadProfileData,
       title: "Profile",
       children: [
         Obx(() {
           if (controller.isProfileLoading.value) {
             return const Center(child: CircularProgressIndicator());
           }
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: ProfileCardWidget(
-                photoUrl: controller.photoUrl.value,
-                namaPengguna: controller.namaPengguna.value,
-                isEditing: controller.isEditing.value,
-                handleController: controller.handleController,
-                bioController: controller.bioController,
-                namaPenggunaController: controller.namaPenggunaController,
-                onTapEdit: controller.toggleEditMode,
-                onTapSimpan: controller.saveProfile,
-                onTapLogout: controller.logout,
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: ProfileCardWidget(
+                  photoUrl: controller.photoUrl.value,
+                  isEditing: controller.isEditing.value,
+                ),
               ),
-            ),
+            ],
           );
         }),
       ],
