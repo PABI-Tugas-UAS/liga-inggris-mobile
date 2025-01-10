@@ -14,40 +14,36 @@ class SearchPage extends GetView<SearchPageController> {
   Widget build(BuildContext context) {
     return CustomPageLayout(
       children: [
-        Expanded(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 12, right: 12, bottom: 8),
-                child: TextField(
-                  onChanged: (value) => controller.onSearchChanged(value),
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    hintText: 'Search Club',
-                    hintStyle: const TextStyle(color: Colors.grey),
-                    filled: true,
-                    fillColor: Colors.transparent,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.white),
-                    ),
-                    prefixIcon: const Icon(Icons.search, color: Colors.white),
-                  ),
-                ),
+        Padding(
+          padding: const EdgeInsets.only(left: 12, right: 12, bottom: 8),
+          child: TextField(
+            onChanged: (value) => controller.onSearchChanged(value),
+            style: const TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              hintText: 'Search Club',
+              hintStyle: const TextStyle(color: Colors.grey),
+              filled: true,
+              fillColor: Colors.transparent,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: Colors.white),
               ),
-              Obx(() {
-                if (controller.clubController.isLoading.value) {
-                  return const CircularProgressIndicator();
-                }
-                return ListClubWidget(clubs: controller.clubController.clubs);
-              }),
-            ],
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: Colors.white),
+              ),
+              prefixIcon: const Icon(Icons.search, color: Colors.white),
+            ),
           ),
         ),
+        Obx(() {
+          if (controller.clubController.isLoading.value) {
+            return const CircularProgressIndicator();
+          }
+          return Expanded(
+            child: ListClubWidget(clubs: controller.clubController.clubs),
+          );
+        }),
       ],
     );
   }

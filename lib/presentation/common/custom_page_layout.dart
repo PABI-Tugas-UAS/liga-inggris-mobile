@@ -5,35 +5,51 @@ class CustomPageLayout extends StatelessWidget {
   final List<Widget> children;
   final String? title;
   final bool scrollableChild;
+  final Function? onRefresh;
 
   const CustomPageLayout({
     super.key,
     required this.children,
     this.title,
     this.scrollableChild = false,
+    this.onRefresh,
   });
 
   @override
   Widget build(BuildContext context) {
-    Widget content = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    final double screenHeight = MediaQuery.of(context).size.height - 130;
+
+    Widget content = Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _buildTitle(),
-              ...children,
-            ],
-          ),
-        ),
+        _buildTitle(),
+        ...children,
       ],
     );
 
     if (scrollableChild) {
       content = SingleChildScrollView(
-        child: content,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: screenHeight,
+          ),
+          child: IntrinsicHeight(
+            child: content,
+          ),
+        ),
+      );
+    }
+
+    if (onRefresh != null) {
+      content = RefreshIndicator(
+        onRefresh: () async {
+          onRefresh!();
+        },
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: content,
+        ),
       );
     }
 

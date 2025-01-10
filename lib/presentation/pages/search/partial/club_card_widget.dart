@@ -47,7 +47,10 @@ class ClubCardWidget extends GetView<SearchPageController> {
                   padding: const EdgeInsets.only(left: 16.0, right: 32.0),
                   child: Text(
                     club.name ?? 'Unknown Club',
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ],
