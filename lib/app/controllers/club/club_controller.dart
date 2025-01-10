@@ -29,10 +29,10 @@ class ClubController extends GetxController {
     isLoading(false);
   }
 
-  Future<void> fetchTopClubs({QueryParams? params}) async {
+  Future<void> fetchTopClubs() async {
     isLoading(true);
     topClubs.clear();
-    final res = await _clubService.getTopClubs(params: params);
+    final res = await _clubService.getTopClubs();
 
     if (res.isSuccess) {
       topClubs.assignAll(res.data ?? []);

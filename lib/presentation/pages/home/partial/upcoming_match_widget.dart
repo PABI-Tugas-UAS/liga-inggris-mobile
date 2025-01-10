@@ -5,10 +5,10 @@ import 'package:liga_inggris_mobile/app/utils/date_convert.dart';
 import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
 import 'package:liga_inggris_mobile/services/match/model.dart';
 
-class UpcommingMatch extends StatelessWidget {
+class UpcomingMatch extends StatelessWidget {
   final RxList<MatchModel> upcomingMatch;
 
-  const UpcommingMatch({
+  const UpcomingMatch({
     super.key,
     required this.upcomingMatch,
   });
@@ -16,32 +16,48 @@ class UpcommingMatch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (upcomingMatch.isEmpty) {
-      return const Column(
-        children: [
-          SizedBox(height: 10),
-          Text(
-            "Upcoming Match",
-            style: TextStyle(fontSize: 24),
-          ),
-          Center(
-            child: Text(
-              "Tidak ada pertandingan",
-              style: TextStyle(fontSize: 16),
-            ),
-          ),
-        ],
-      );
+      return const _EmptyMatch();
     }
     return Column(
       children: [
-        _nextMatch(upcomingMatch.first),
+        _NextMatch(match: upcomingMatch.first),
         const SizedBox(height: 4),
-        _upcomingMatch(upcomingMatch),
+        _UpcomingMatches(matches: upcomingMatch),
       ],
     );
   }
+}
 
-  Widget _nextMatch(MatchModel match) {
+class _EmptyMatch extends StatelessWidget {
+  const _EmptyMatch();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        SizedBox(height: 10),
+        Text(
+          "Upcoming Match",
+          style: TextStyle(fontSize: 24),
+        ),
+        Center(
+          child: Text(
+            "Tidak ada pertandingan",
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _NextMatch extends StatelessWidget {
+  final MatchModel match;
+
+  const _NextMatch({required this.match});
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         const Text(
@@ -81,9 +97,7 @@ class UpcommingMatch extends StatelessWidget {
                         Expanded(
                           child: Text(
                             match.homeClub.name!,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
+                            style: const TextStyle(fontSize: 14),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
                             textAlign: TextAlign.center,
@@ -99,9 +113,7 @@ class UpcommingMatch extends StatelessWidget {
                         Expanded(
                           child: Text(
                             match.awayClub.name!,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
+                            style: const TextStyle(fontSize: 14),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
                             textAlign: TextAlign.center,
@@ -127,9 +139,7 @@ class UpcommingMatch extends StatelessWidget {
               left: 0,
               right: 0,
               child: Center(
-                child: Text(
-                  'Hari Ini',
-                ),
+                child: Text('Hari Ini'),
               ),
             ),
             Positioned(
@@ -148,55 +158,61 @@ class UpcommingMatch extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _upcomingMatch(RxList<MatchModel> upcomingMatches) {
+class _UpcomingMatches extends StatelessWidget {
+  final RxList<MatchModel> matches;
+
+  const _UpcomingMatches({required this.matches});
+
+  @override
+  Widget build(BuildContext context) {
+    if (matches.length <= 1) {
+      return const Center(
+        child: Text(
+          "Tidak ada pertandingan",
+          style: TextStyle(fontSize: 16),
+        ),
+      );
+    }
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (upcomingMatches.length <= 1)
-          const Center(
-            child: Text(
-              "Tidak ada pertandingan",
-              style: TextStyle(fontSize: 16),
-            ),
-          )
-        else
-          Column(
-            children: List.generate(
-              (upcomingMatches.length - 1) ~/ 2,
-              (index) {
-                final match1 = upcomingMatches[index * 2 + 1];
-                final match2 = upcomingMatches[index * 2 + 2];
+      children: List.generate(
+        (matches.length - 1) ~/ 2,
+        (index) {
+          final match1 = matches[index * 2 + 1];
+          final match2 = matches[index * 2 + 2];
 
-                return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
-                  child: Container(
-                    constraints: const BoxConstraints(maxWidth: 600),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: _matchCard(match1),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: _matchCard(match2),
-                        ),
-                      ],
-                    ),
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: _MatchCard(match: match1),
                   ),
-                );
-              },
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: _MatchCard(match: match2),
+                  ),
+                ],
+              ),
             ),
-          ),
-      ],
+          );
+        },
+      ),
     );
   }
+}
 
-  Widget _matchCard(MatchModel match) {
+class _MatchCard extends StatelessWidget {
+  final MatchModel match;
+
+  const _MatchCard({required this.match});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: 100,
       decoration: BoxDecoration(
@@ -207,7 +223,10 @@ class UpcommingMatch extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+        padding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 8,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -233,9 +252,7 @@ class UpcommingMatch extends StatelessWidget {
                       Expanded(
                         child: Text(
                           match.homeClub.name!,
-                          style: const TextStyle(
-                            fontSize: 10,
-                          ),
+                          style: const TextStyle(fontSize: 10),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
@@ -258,9 +275,7 @@ class UpcommingMatch extends StatelessWidget {
                       Expanded(
                         child: Text(
                           match.awayClub.name!,
-                          style: const TextStyle(
-                            fontSize: 10,
-                          ),
+                          style: const TextStyle(fontSize: 10),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
@@ -278,9 +293,7 @@ class UpcommingMatch extends StatelessWidget {
                 children: [
                   Text(
                     convertDate(match.date).substring(0, 6).toUpperCase(),
-                    style: const TextStyle(
-                      fontSize: 10,
-                    ),
+                    style: const TextStyle(fontSize: 10),
                   ),
                   const Divider(
                     thickness: 1,
@@ -289,9 +302,7 @@ class UpcommingMatch extends StatelessWidget {
                   ),
                   Text(
                     match.time.substring(0, 5),
-                    style: const TextStyle(
-                      fontSize: 10,
-                    ),
+                    style: const TextStyle(fontSize: 10),
                   ),
                 ],
               ),

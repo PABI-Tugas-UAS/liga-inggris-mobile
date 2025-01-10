@@ -20,9 +20,8 @@ class ClubService extends BaseService {
     }
   }
 
-  Future<ServiceResult<List<ClubModel>>> getTopClubs(
-      {QueryParams? params}) async {
-    final response = await get('/top-clubs', queryParams: params);
+  Future<ServiceResult<List<ClubModel>>> getTopClubs() async {
+    final response = await get('/top-clubs');
 
     if (response.success) {
       final List<ClubModel> topClubs = [];

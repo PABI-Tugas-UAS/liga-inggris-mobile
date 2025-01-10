@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/enums/tab_enum.dart';
 import 'package:liga_inggris_mobile/app/utils/tab_utils.dart';
@@ -74,7 +73,7 @@ class HomePage extends GetView<HomeController> {
                       return const Center(child: Text("Loading..."));
                     }
 
-                    return UpcommingMatch(
+                    return UpcomingMatch(
                       upcomingMatch: controller.matchController.upcomingMatches,
                     );
                   },

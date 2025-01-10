@@ -54,7 +54,7 @@ class MatchController extends GetxController {
   Future<void> fetchCurrentMatches() async {
     currentMatches.clear();
     isCurrentMatchesLoading(true);
-    final res = await _matchService.getCurrentMatches();
+    final res = await _matchService.getMatches(params: {'status': 'current'});
 
     if (res.isSuccess) {
       currentMatches.assignAll(res.data ?? []);
@@ -72,7 +72,7 @@ class MatchController extends GetxController {
   Future<void> fetchUpcomingMatches() async {
     upcomingMatches.clear();
     isUpcomingMatchesLoading(true);
-    final res = await _matchService.getUpcomingMatches();
+    final res = await _matchService.getMatches(params: {'status': 'upcoming'});
 
     if (res.isSuccess) {
       upcomingMatches.assignAll(res.data ?? []);

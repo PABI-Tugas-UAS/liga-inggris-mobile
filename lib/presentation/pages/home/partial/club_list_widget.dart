@@ -29,61 +29,56 @@ class ClubListWidget extends GetView<HomeController> {
           child: Row(
             children: [
               ...clubs.map(
-                (club) {
-                  return ClickableCard(
-                    onTap: () => _handleTapCard(club),
-                    color: Colors.transparent,
-                    elevation: 0,
-                    child: DefaultTextStyle(
-                      style: TextStyle(color: AppColors.text),
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 4),
-                        child: SizedBox(
-                          height: 62,
-                          width: 62,
-                          child: Container(
-                            margin: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                                gradient: AppColors.homeLogoBackground,
-                                shape: BoxShape.circle),
-                            child: Padding(
-                              padding: const EdgeInsets.all(7),
-                              child: ClubLogoWidget(
-                                imageUrl: club.logo!,
-                                width: 40,
-                                height: 40,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: 62,
-                width: 62,
-                child: GestureDetector(
-                  onTap: onTap,
-                  child: Container(
-                    margin: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      gradient: AppColors.homeLogoBackground,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.more_horiz,
-                      color: Colors.white.withOpacity(0.7),
-                      size: 24,
-                    ),
-                  ),
+                (club) => _ClubListCard(
+                  club: club,
+                  onTap: () => _handleTapCard(club),
                 ),
               ),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ClubListCard extends StatelessWidget {
+  final ClubModel club;
+  final VoidCallback onTap;
+
+  const _ClubListCard({required this.club, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return ClickableCard(
+      onTap: onTap,
+      color: Colors.transparent,
+      elevation: 0,
+      child: DefaultTextStyle(
+        style: TextStyle(color: AppColors.text),
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 4),
+          child: SizedBox(
+            height: 62,
+            width: 62,
+            child: Container(
+              margin: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                gradient: AppColors.homeLogoBackground,
+                shape: BoxShape.circle,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(7),
+                child: ClubLogoWidget(
+                  imageUrl: club.logo!,
+                  width: 40,
+                  height: 40,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
