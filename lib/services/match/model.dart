@@ -36,6 +36,14 @@ class MatchModel {
       status: json['status'],
     );
   }
+
+  static List<MatchModel> fromJsonList(List<dynamic> jsonList) {
+    List<MatchModel> items = [];
+    for (var i = 0; i < jsonList.length; i++) {
+      items.add(MatchModel.fromJson(jsonList[i]));
+    }
+    return items;
+  }
 }
 
 class MatchDetailModel {
