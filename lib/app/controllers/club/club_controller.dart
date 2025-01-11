@@ -11,7 +11,7 @@ class ClubController extends GetxController {
   var clubs = RxList<ClubModel>([]);
   var topClubs = RxList<ClubModel>([]);
   var searchClub = Rxn<ClubModel>();
-  var clubDetails = Rxn<ClubModel>();
+  var clubDetails = Rxn<ClubDetailModel>();
 
   Future<void> fetchClubs({QueryParams? params}) async {
     isLoading(true);
