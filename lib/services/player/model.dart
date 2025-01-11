@@ -22,4 +22,12 @@ class PlayerModel {
       position: json['position'],
     );
   }
+
+  static List<PlayerModel> fromJsonList(List<dynamic> jsonList) {
+    List<PlayerModel> items = [];
+    for (var i = 0; i < jsonList.length; i++) {
+      items.add(PlayerModel.fromJson(jsonList[i]));
+    }
+    return items;
+  }
 }

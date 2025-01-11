@@ -11,6 +11,7 @@ class ClubController extends GetxController {
   var clubs = RxList<ClubModel>([]);
   var topClubs = RxList<ClubModel>([]);
   var searchClub = Rxn<ClubModel>();
+  var clubDetails = Rxn<ClubDetailModel>();
 
   Future<void> fetchClubs({QueryParams? params}) async {
     isLoading(true);
@@ -23,6 +24,23 @@ class ClubController extends GetxController {
       Get.snackbar(
         'Clubs',
         res.errMessage ?? 'Failed to fetch clubs',
+        snackPosition: SnackPosition.TOP,
+      );
+    }
+    isLoading(false);
+  }
+
+  Future<void> fetchClubDetails(String clubId) async {
+    isLoading(true);
+    clubDetails.value = null;
+    final res = await _clubService.getClubDetails(clubId);
+
+    if (res.isSuccess) {
+      clubDetails.value = res.data;
+    } else {
+      Get.snackbar(
+        'Club Details',
+        res.errMessage ?? 'Failed to fetch club details',
         snackPosition: SnackPosition.TOP,
       );
     }

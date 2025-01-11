@@ -20,6 +20,16 @@ class ClubService extends BaseService {
     }
   }
 
+  Future<ServiceResult<ClubDetailModel>> getClubDetails(String clubId) async {
+    final response = await get('/clubs/$clubId');
+
+    if (response.success) {
+      return ServiceResult.success(ClubDetailModel.fromJson(response.data));
+    } else {
+      return ServiceResult.failure(response.message);
+    }
+  }
+
   Future<ServiceResult<List<ClubModel>>> getTopClubs() async {
     final response = await get('/top-clubs');
 

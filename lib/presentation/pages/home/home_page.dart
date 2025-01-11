@@ -6,6 +6,7 @@ import 'package:liga_inggris_mobile/presentation/common/custom_page_layout.dart'
 import 'package:liga_inggris_mobile/presentation/controllers/home/home_controller.dart';
 import 'package:liga_inggris_mobile/presentation/pages/home/partial/club_list_widget.dart';
 import 'package:liga_inggris_mobile/presentation/pages/home/partial/current_match_widget.dart';
+import 'package:liga_inggris_mobile/presentation/pages/home/partial/empty_data_widget.dart';
 import 'package:liga_inggris_mobile/presentation/pages/home/partial/top_club_widget.dart';
 import 'package:liga_inggris_mobile/presentation/pages/home/partial/upcoming_match_widget.dart';
 
@@ -28,22 +29,37 @@ class HomePage extends GetView<HomeController> {
       children: [
         Column(
           children: [
+            // current match
+            Obx(() {
+              if (controller.clubController.isLoading.value) {
+                return const Center(child: Text("Loading..."));
+              }
+
+              if (controller.clubController.clubs.isEmpty) {
+                return const EmptyDataWidget(
+                  title: "Pertandingan Saat Ini",
+                  message: "Tidak ada pertandingan",
+                );
+              }
+
+              return CurrentMatchWidget(
+                currentMatch: controller.matchController.currentMatches,
+              );
+            }),
+            const SizedBox(height: 28),
+
+            // top club
             Obx(
               () {
                 if (controller.clubController.isLoading.value) {
                   return const Center(child: Text("Loading..."));
                 }
 
-                return CurrentMatchWidget(
-                  currentMatch: controller.matchController.currentMatches,
-                );
-              },
-            ),
-            const SizedBox(height: 28),
-            Obx(
-              () {
-                if (controller.clubController.isLoading.value) {
-                  return const Center(child: Text("Loading..."));
+                if (controller.clubController.topClubs.isEmpty) {
+                  return const EmptyDataWidget(
+                    title: "Klub Teratas",
+                    message: "Tidak ada klub teratas",
+                  );
                 }
 
                 return TopClubWidget(
@@ -52,10 +68,19 @@ class HomePage extends GetView<HomeController> {
               },
             ),
             const SizedBox(height: 24),
+
+            // club list
             Obx(
               () {
                 if (controller.clubController.isLoading.value) {
                   return const Center(child: Text("Loading..."));
+                }
+
+                if (controller.clubController.clubs.isEmpty) {
+                  return const EmptyDataWidget(
+                    title: "Daftar Klub",
+                    message: "Tidak ada klub",
+                  );
                 }
 
                 return ClubListWidget(
@@ -65,10 +90,19 @@ class HomePage extends GetView<HomeController> {
               },
             ),
             const SizedBox(height: 24),
+
+            // upcoming match
             Obx(
               () {
                 if (controller.clubController.isLoading.value) {
                   return const Center(child: Text("Loading..."));
+                }
+
+                if (controller.matchController.upcomingMatches.isEmpty) {
+                  return const EmptyDataWidget(
+                    title: "Pertandingan Selanjutnya",
+                    message: "Tidak ada pertandingan",
+                  );
                 }
 
                 return UpcomingMatch(

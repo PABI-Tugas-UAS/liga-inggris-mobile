@@ -13,10 +13,12 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    clubController.fetchClubs();
-    clubController.fetchTopClubs();
-    matchController.fetchCurrentMatches();
-    matchController.fetchUpcomingMatches();
+    Future.wait([
+      clubController.fetchClubs(),
+      clubController.fetchTopClubs(),
+      matchController.fetchCurrentMatches(),
+      matchController.fetchUpcomingMatches(),
+    ]);
   }
 
   void goToMatchDetail(int matchId) {
@@ -27,8 +29,7 @@ class HomeController extends GetxController {
   }
 
   void goToClubDetail(int clubId) {
-    // TODO: bikin kayak match_page_controller, fungsi redirect ke detail club screen
-    // clubController.fetchClubDetails(clubId.toString());
+    clubController.fetchClubDetails(clubId.toString());
 
     Get.toNamed('/clubs/$clubId');
   }
