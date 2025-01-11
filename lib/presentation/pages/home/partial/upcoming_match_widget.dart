@@ -15,37 +15,11 @@ class UpcomingMatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (upcomingMatch.isEmpty) {
-      return const _EmptyMatch();
-    }
     return Column(
       children: [
         _NextMatch(match: upcomingMatch.first),
         const SizedBox(height: 4),
         _UpcomingMatches(matches: upcomingMatch),
-      ],
-    );
-  }
-}
-
-class _EmptyMatch extends StatelessWidget {
-  const _EmptyMatch();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        SizedBox(height: 10),
-        Text(
-          "Upcoming Match",
-          style: TextStyle(fontSize: 24),
-        ),
-        Center(
-          child: Text(
-            "Tidak ada pertandingan",
-            style: TextStyle(fontSize: 16),
-          ),
-        ),
       ],
     );
   }

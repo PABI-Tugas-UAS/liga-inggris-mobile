@@ -3,63 +3,15 @@ import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/config/app_colors.dart';
 import 'package:liga_inggris_mobile/presentation/common/clickable_card_widget.dart';
 import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
-import 'package:liga_inggris_mobile/presentation/controllers/home/home_controller.dart';
+import 'package:liga_inggris_mobile/presentation/controllers/match/match_page_controller.dart';
 import 'package:liga_inggris_mobile/services/match/model.dart';
 
-class CurrentMatchWidget extends GetView<HomeController> {
+class CurrentMatchWidget extends StatelessWidget {
   final RxList<MatchModel> currentMatch;
 
   const CurrentMatchWidget({
     super.key,
     required this.currentMatch,
-  });
-
-  void _handleTapCard(int matchId) {
-    controller.goToMatchDetail(matchId);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (currentMatch.isEmpty) {
-      return const _EmptyMatch();
-    }
-    return _CurrentMatch(
-      match: currentMatch.first,
-      onTap: () => _handleTapCard(currentMatch.first.id),
-    );
-  }
-}
-
-class _EmptyMatch extends StatelessWidget {
-  const _EmptyMatch();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        SizedBox(height: 10),
-        Text(
-          "Pertandingan Saat Ini",
-          style: TextStyle(fontSize: 24),
-        ),
-        Center(
-          child: Text(
-            "Tidak ada pertandingan",
-            style: TextStyle(fontSize: 16),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _CurrentMatch extends StatelessWidget {
-  final MatchModel match;
-  final VoidCallback onTap;
-
-  const _CurrentMatch({
-    required this.match,
-    required this.onTap,
   });
 
   @override
@@ -74,27 +26,28 @@ class _CurrentMatch extends StatelessWidget {
           ),
         ),
         _MatchCard(
-          match: match,
-          onTap: onTap,
+          match: currentMatch.first,
         ),
       ],
     );
   }
 }
 
-class _MatchCard extends StatelessWidget {
+class _MatchCard extends GetView<MatchPageController> {
   final MatchModel match;
-  final VoidCallback onTap;
 
   const _MatchCard({
     required this.match,
-    required this.onTap,
   });
+
+  void _toMatchDetail(int matchId) {
+    controller.goToMatchDetail(matchId);
+  }
 
   @override
   Widget build(BuildContext context) {
     return ClickableCard(
-      onTap: onTap,
+      onTap: () => _toMatchDetail(match.id),
       color: AppColors.cardBackground,
       child: DefaultTextStyle(
         style: TextStyle(color: AppColors.text),

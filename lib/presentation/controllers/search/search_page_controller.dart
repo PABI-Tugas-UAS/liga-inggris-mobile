@@ -33,8 +33,7 @@ class SearchPageController extends GetxController {
   }
 
   void goToClubDetail(int clubId) {
-    // TODO: bikin kayak match_page_controller, fungsi redirect ke detail club screen
-    // clubController.fetchClubDetails(clubId.toString());
+    clubController.fetchClubDetails(clubId.toString());
 
     Get.toNamed('/clubs/$clubId');
   }
