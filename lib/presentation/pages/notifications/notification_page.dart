@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:liga_inggris_mobile/presentation/common/custom_page_layout.dart';
-import 'package:liga_inggris_mobile/presentation/common/notification_card_widget.dart';
+import 'package:liga_inggris_mobile/presentation/pages/notifications/partial/notification_card_widget.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
