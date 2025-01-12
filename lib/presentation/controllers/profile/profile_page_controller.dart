@@ -13,6 +13,7 @@ class ProfilePageController extends GetxController {
   late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController bioController;
+  var favoriteClubs = <String>[].obs; 
 
   @override
   void onInit() {
@@ -70,6 +71,16 @@ class ProfilePageController extends GetxController {
     Get.snackbar(
       "Berhasil",
       "Profil berhasil disimpan",
+      snackPosition: SnackPosition.TOP,
+      colorText: Colors.white,
+    );
+  }
+
+  void removeFavorite(String clubName) {
+    favoriteClubs.remove(clubName);
+    Get.snackbar(
+      "Berhasil",
+      "$clubName dihapus dari favorit",
       snackPosition: SnackPosition.TOP,
       colorText: Colors.white,
     );
