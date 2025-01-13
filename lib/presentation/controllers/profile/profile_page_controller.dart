@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:liga_inggris_mobile/services/club/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:liga_inggris_mobile/services/auth/model.dart';
 import 'package:flutter/material.dart';
@@ -9,17 +10,18 @@ class ProfilePageController extends GetxController {
   var bio = ''.obs;
   var isEditing = false.obs;
   var user = Rxn<UserModel>();
+  var favoriteClubs = <ClubModel>[].obs; 
 
   late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController bioController;
-  var favoriteClubs = <String>[].obs;
 
   @override
   void onInit() {
     super.onInit();
     print("!!! initawdawd");
     loadProfileData();
+    loadFavoriteClubs();
     usernameController = TextEditingController();
     emailController = TextEditingController();
     bioController = TextEditingController();
@@ -76,14 +78,37 @@ class ProfilePageController extends GetxController {
     );
   }
 
-  void removeFavoriteClub(int id) {
-    favoriteClubs.removeWhere((club) => club == id);
-    Get.snackbar(
-      "Berhasil",
-      "Klub berhasil dihapus dari favorit",
-      snackPosition: SnackPosition.TOP,
-      colorText: Colors.white,
-    );
+  void loadFavoriteClubs() {
+    favoriteClubs.addAll([
+      ClubModel(
+        id: 1,
+        name: "Arsenal",
+        coach: "Ole Gunnar Solskjaer",
+        foundedYear: 1878,
+        achievements: [
+          "Premier League",
+          "FA Cup",
+          "UEFA Champions League",
+        ],
+        logo: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
+      ),
+      ClubModel(
+        id: 2,
+        name: "Chelsea",
+        coach: "Thomas Tuchel",
+        foundedYear: 1905,
+        achievements: [
+          "Premier League",
+          "FA Cup",
+          "UEFA Champions League",
+        ],
+        logo: "https://upload.wikimedia.org/wikipedia/id/c/cc/Chelsea_FC.svg",
+      ),
+    ]);
+  }
+
+  void deleteFavoriteClub(int id) {
+    favoriteClubs.removeWhere((club) => club.id == id);
   }
 
   void logout() async {

@@ -77,7 +77,7 @@ class FavoriteCardWidget extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        Get.find<ProfilePageController>().removeFavoriteClub(club.id ?? 0);
+                        Get.find<ProfilePageController>().deleteFavoriteClub(club.id!);
                         Navigator.pop(context);
                       },
                       child: const Text('Hapus'),
