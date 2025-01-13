@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/config/app_colors.dart';
 import 'package:liga_inggris_mobile/app/consts/match_const.dart';
+import 'package:liga_inggris_mobile/app/controllers/club/club_controller.dart';
 import 'package:liga_inggris_mobile/app/controllers/match/match_controller.dart';
 import 'package:liga_inggris_mobile/app/enums/match_details_tab_enum.dart';
 import 'package:liga_inggris_mobile/app/utils/time_convert.dart';
@@ -20,6 +21,11 @@ class MatchDetailScreen extends GetView<MatchController> {
 
   void setContentTabIndex(int index) {
     contentTabIndex.value = index;
+  }
+
+  void _goToClubDetail(int clubId) {
+    Get.find<ClubController>().fetchClubDetails(clubId.toString());
+    Get.toNamed('/clubs/$clubId');
   }
 
   @override
@@ -115,10 +121,13 @@ class MatchDetailScreen extends GetView<MatchController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ClubLogoWidget(
-                imageUrl: matchDetails.homeClub.logo!,
-                width: 100,
-                height: 100,
+              GestureDetector(
+                onTap: () => _goToClubDetail(matchDetails.homeClub.id!),
+                child: ClubLogoWidget(
+                  imageUrl: matchDetails.homeClub.logo!,
+                  width: 100,
+                  height: 100,
+                ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -130,10 +139,13 @@ class MatchDetailScreen extends GetView<MatchController> {
                   ),
                 ),
               ),
-              ClubLogoWidget(
-                imageUrl: matchDetails.awayClub.logo!,
-                width: 100,
-                height: 100,
+              GestureDetector(
+                onTap: () => _goToClubDetail(matchDetails.awayClub.id!),
+                child: ClubLogoWidget(
+                  imageUrl: matchDetails.awayClub.logo!,
+                  width: 100,
+                  height: 100,
+                ),
               ),
             ],
           ),
