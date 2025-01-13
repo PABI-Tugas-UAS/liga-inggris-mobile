@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
+import 'package:liga_inggris_mobile/presentation/controllers/profile/profile_page_controller.dart';
+import 'package:liga_inggris_mobile/services/club/model.dart';
 
 class FavoriteCardWidget extends StatelessWidget {
-  const FavoriteCardWidget({super.key});
+  final ClubModel club;
+  const FavoriteCardWidget({super.key, required this.club});
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +32,8 @@ class FavoriteCardWidget extends StatelessWidget {
                       child: Container(
                         width: 100,
                         alignment: Alignment.center,
-                        child: const ClubLogoWidget(
-                          imageUrl:
-                              'https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg',
+                        child: ClubLogoWidget(
+                          imageUrl: club.logo ?? '',
                           width: 80,
                           height: 80,
                         ),
@@ -39,9 +42,9 @@ class FavoriteCardWidget extends StatelessWidget {
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                      child: const Text(
-                        'Arsenal FC',
-                        style: TextStyle(
+                      child: Text(
+                        club.name ?? '',
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         ),
@@ -59,7 +62,6 @@ class FavoriteCardWidget extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              // Implementasi aksi tombol delete
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -75,7 +77,7 @@ class FavoriteCardWidget extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        // Logika untuk menghapus item
+                        Get.find<ProfilePageController>().removeFavoriteClub(club.id ?? 0);
                         Navigator.pop(context);
                       },
                       child: const Text('Hapus'),

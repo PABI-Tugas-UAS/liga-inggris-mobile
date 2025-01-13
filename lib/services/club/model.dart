@@ -28,6 +28,17 @@ class ClubModel {
       logo: json['logo'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'coach': coach,
+      'foundedYear': foundedYear,
+      'achievements': achievements,
+      'logo': logo,
+    };
+  }
 }
 
 class ClubDetailModel {
