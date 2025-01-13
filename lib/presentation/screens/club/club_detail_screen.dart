@@ -46,6 +46,20 @@ class ClubDetailScreen extends GetView<ClubController> {
           clubDetails.name,
           style: const TextStyle(fontSize: 20),
         ),
+        GestureDetector(
+        onTap: () {
+          controller.toggleFavorite(clubId);
+        },
+        child: Obx(() {
+          return Icon(
+            size: 40,
+            controller.isFavorite(clubId)
+                ? Icons.favorite
+                : Icons.favorite_border,
+            color: controller.isFavorite(clubId) ? Colors.red : Colors.white,
+          );
+        }),
+      ),
         const SizedBox(height: 16),
         const Divider(),
         const SizedBox(height: 16),

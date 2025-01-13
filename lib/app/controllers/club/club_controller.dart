@@ -12,6 +12,7 @@ class ClubController extends GetxController {
   var topClubs = RxList<ClubModel>([]);
   var searchClub = Rxn<ClubModel>();
   var clubDetails = Rxn<ClubDetailModel>();
+  var favoriteClubs = <String>{}.obs; 
 
   Future<void> fetchClubs({QueryParams? params}) async {
     isLoading(true);
@@ -62,5 +63,17 @@ class ClubController extends GetxController {
       );
     }
     isLoading(false);
+  }
+
+  void toggleFavorite(String clubId) {
+    if (favoriteClubs.contains(clubId)) {
+      favoriteClubs.remove(clubId);
+    } else {
+      favoriteClubs.add(clubId);
+    }
+  }
+
+  bool isFavorite(String clubId) {
+    return favoriteClubs.contains(clubId);
   }
 }
