@@ -37,4 +37,8 @@ class SearchPageController extends GetxController {
 
     Get.toNamed('/clubs/$clubId');
   }
+
+  void onPageRefresh() {
+    clubController.fetchClubs();
+  }
 }
