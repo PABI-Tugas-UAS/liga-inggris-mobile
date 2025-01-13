@@ -25,17 +25,18 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return CustomPageLayout(
+      onRefresh: controller.onRefreshPage,
       scrollableChild: true,
       children: [
         Column(
           children: [
             // current match
             Obx(() {
-              if (controller.clubController.isLoading.value) {
+              if (controller.matchController.isCurrentMatchesLoading.value) {
                 return const Center(child: Text("Loading..."));
               }
 
-              if (controller.clubController.clubs.isEmpty) {
+              if (controller.matchController.currentMatches.isEmpty) {
                 return const EmptyDataWidget(
                   title: "Pertandingan Saat Ini",
                   message: "Tidak ada pertandingan",

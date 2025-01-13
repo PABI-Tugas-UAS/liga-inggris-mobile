@@ -33,4 +33,11 @@ class HomeController extends GetxController {
 
     Get.toNamed('/clubs/$clubId');
   }
+
+  void onRefreshPage() {
+    clubController.fetchClubs();
+    clubController.fetchTopClubs();
+    matchController.fetchCurrentMatches();
+    matchController.fetchUpcomingMatches();
+  }
 }
