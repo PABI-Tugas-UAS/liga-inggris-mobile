@@ -10,7 +10,7 @@ import 'package:liga_inggris_mobile/presentation/pages/home/partial/empty_data_w
 import 'package:liga_inggris_mobile/presentation/pages/home/partial/top_club_widget.dart';
 import 'package:liga_inggris_mobile/presentation/pages/home/partial/upcoming_match_widget.dart';
 
-class HomePage extends GetView<HomeController> {
+class HomePage extends GetView<HomePageController> {
   final CupertinoTabController tabController;
 
   const HomePage({super.key, required this.tabController});

@@ -33,7 +33,7 @@ class CurrentMatchWidget extends StatelessWidget {
   }
 }
 
-class _MatchCard extends GetView<HomeController> {
+class _MatchCard extends GetView<HomePageController> {
   final MatchModel match;
 
   const _MatchCard({

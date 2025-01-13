@@ -12,6 +12,6 @@ class HomePageBinding extends Bindings {
     Get.lazyPut(() => ClubController());
     Get.lazyPut(() => MatchController());
     Get.lazyPut(() => PlayerController());
-    Get.put(HomeController());
+    Get.put(HomePageController());
   }
 }

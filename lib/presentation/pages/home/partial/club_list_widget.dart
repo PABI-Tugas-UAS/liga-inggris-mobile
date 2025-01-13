@@ -6,7 +6,7 @@ import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
 import 'package:liga_inggris_mobile/presentation/controllers/home/home_controller.dart';
 import 'package:liga_inggris_mobile/services/club/model.dart';
 
-class ClubListWidget extends GetView<HomeController> {
+class ClubListWidget extends GetView<HomePageController> {
   final List<ClubModel> clubs;
   final VoidCallback onTap;
 

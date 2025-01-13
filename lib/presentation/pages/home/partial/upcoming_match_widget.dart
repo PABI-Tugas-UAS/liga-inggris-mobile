@@ -26,7 +26,7 @@ class UpcomingMatch extends StatelessWidget {
   }
 }
 
-class _NextMatch extends GetView<HomeController> {
+class _NextMatch extends GetView<HomePageController> {
   final MatchModel match;
 
   const _NextMatch({required this.match});
@@ -184,7 +184,7 @@ class _UpcomingMatches extends StatelessWidget {
   }
 }
 
-class _MatchCard extends GetView<HomeController> {
+class _MatchCard extends GetView<HomePageController> {
   final MatchModel match;
 
   const _MatchCard({required this.match});
