@@ -11,18 +11,17 @@ class ProfilePageController extends GetxController {
   var bio = ''.obs;
   var isEditing = false.obs;
   var user = Rxn<UserModel>();
-  var favoriteClubs = <ClubModel>[].obs; 
+  var favoriteClubs = <ClubModel>[].obs;
 
   late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController bioController;
 
-  final ClubController _clubController = Get.find<ClubController>(); 
+  final ClubController _clubController = Get.find<ClubController>();
 
   @override
   void onInit() {
     super.onInit();
-    print("!!! initawdawd");
     loadProfileData();
     loadFavoriteClubs();
     ever(_clubController.favoriteClubs, (_) => loadFavoriteClubs());
@@ -37,7 +36,6 @@ class ProfilePageController extends GetxController {
 
     String? userJson = prefs.getString('user');
     if (userJson != null) {
-      print("=======> $userJson");
       user.value = UserModel.fromJson(userJson);
     } else {
       user.value = UserModel(
@@ -99,5 +97,11 @@ class ProfilePageController extends GetxController {
     await prefs.clear();
     Get.toNamed('/signin');
     Get.delete();
+  }
+
+  void goToClubDetail(int clubId) {
+    _clubController.fetchClubDetails(clubId.toString());
+
+    Get.toNamed('/clubs/$clubId');
   }
 }
