@@ -25,6 +25,7 @@ class ProfilePageController extends GetxController {
     print("!!! initawdawd");
     loadProfileData();
     loadFavoriteClubs();
+    ever(_clubController.favoriteClubs, (_) => loadFavoriteClubs());
     usernameController = TextEditingController();
     emailController = TextEditingController();
     bioController = TextEditingController();
