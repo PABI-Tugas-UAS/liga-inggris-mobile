@@ -14,23 +14,24 @@ class MatchPage extends GetView<MatchPageController> {
   Widget build(BuildContext context) {
     return CustomPageLayout(
       title: "Match List",
+      onRefresh: controller.onPageRefresh,
       children: [
         Obx(() {
           if (controller.matchController.isMatchesLoading.value) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
-          return Flexible(
-            child: ListView.builder(
-              padding: const EdgeInsets.only(left: 12, right: 12),
-              itemCount: controller.matchController.matches.length,
-              itemBuilder: (context, index) {
-                final match = controller.matchController.matches[index];
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: MatchCardWidget(match: match),
-                );
-              },
-            ),
+          return ListView.builder(
+            padding: const EdgeInsets.only(left: 12, right: 12),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: controller.matchController.matches.length,
+            itemBuilder: (context, index) {
+              final match = controller.matchController.matches[index];
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: MatchCardWidget(match: match),
+              );
+            },
           );
         }),
       ],
