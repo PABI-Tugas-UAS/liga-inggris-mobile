@@ -42,15 +42,24 @@ class CustomPageLayout extends StatelessWidget {
     }
 
     if (onRefresh != null) {
-      content = RefreshIndicator(
-        onRefresh: () async {
-          onRefresh!();
-        },
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: content,
-        ),
-      );
+      if (children.length == 1 && children[0] is ListView) {
+        content = RefreshIndicator(
+          onRefresh: () async {
+            await onRefresh!();
+          },
+          child: children[0],
+        );
+      } else {
+        content = RefreshIndicator(
+          onRefresh: () async {
+            await onRefresh!();
+          },
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: content,
+          ),
+        );
+      }
     }
 
     return Scaffold(
