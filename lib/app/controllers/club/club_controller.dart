@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/types/types.dart';
 import 'package:liga_inggris_mobile/services/club/model.dart';
 import 'package:liga_inggris_mobile/services/club/service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ClubController extends GetxController {
   ClubController();
@@ -65,12 +66,20 @@ class ClubController extends GetxController {
     isLoading(false);
   }
 
-  void toggleFavorite(String clubId) {
+  void toggleFavorite(String clubId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String> savedFavClubs = prefs.getStringList('favoriteClubs') ?? [];
+
     if (favoriteClubs.contains(clubId)) {
       favoriteClubs.remove(clubId);
+      savedFavClubs.remove(clubId);
     } else {
       favoriteClubs.add(clubId);
+      savedFavClubs.add(clubId);
     }
+
+    await prefs.setStringList('favoriteClubs', savedFavClubs);
   }
 
   bool isFavorite(String clubId) {

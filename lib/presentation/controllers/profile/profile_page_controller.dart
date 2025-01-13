@@ -80,10 +80,15 @@ class ProfilePageController extends GetxController {
     );
   }
 
-  void loadFavoriteClubs() {
+  void loadFavoriteClubs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String> storedFavoriteClubs =
+        prefs.getStringList('favoriteClubs') ?? [];
     var allClubs = _clubController.clubs;
+
     favoriteClubs.value = allClubs.where((club) {
-      return _clubController.favoriteClubs.contains(club.id.toString());
+      return storedFavoriteClubs.contains(club.id.toString());
     }).toList();
   }
 
