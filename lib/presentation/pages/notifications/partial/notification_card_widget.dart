@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NotificationCardWidget extends StatelessWidget{
+class NotificationCardWidget extends StatelessWidget {
   final String text;
   const NotificationCardWidget({super.key, required this.text});
 

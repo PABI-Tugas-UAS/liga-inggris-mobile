@@ -23,19 +23,18 @@ class FavoriteCardWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: SizedBox(
-                height: 80,
+                height: 70,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 12),
+                      padding: const EdgeInsets.only(left: 16),
                       child: Container(
-                        width: 100,
                         alignment: Alignment.center,
                         child: ClubLogoWidget(
                           imageUrl: club.logo ?? '',
-                          width: 50,
-                          height: 50,
+                          width: 45,
+                          height: 45,
                         ),
                       ),
                     ),
@@ -46,7 +45,8 @@ class FavoriteCardWidget extends StatelessWidget {
                         club.name ?? '',
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          overflow: TextOverflow.ellipsis,
+                          fontSize: 16,
                         ),
                       ),
                     ),
@@ -58,7 +58,7 @@ class FavoriteCardWidget extends StatelessWidget {
           IconButton(
             icon: const Icon(
               Icons.delete_outlined,
-              size: 60,
+              size: 32,
               color: Colors.white,
             ),
             onPressed: () {

@@ -9,15 +9,17 @@ class FavoriteScreen extends GetView<ProfilePageController> {
 
   @override
   Widget build(BuildContext context) {
+    final favoriteClubs = controller.favoriteClubs;
+
     return CustomScreenLayout(
       goBackTitle: "Favorit Klub",
       children: [
         Obx(() {
           return Column(
             children: [
-              ...controller.favoriteClubs.map((club) {
+              ...favoriteClubs.map((club) {
                 return FavoriteCardWidget(club: club);
-              }).toList(),
+              }),
             ],
           );
         })
