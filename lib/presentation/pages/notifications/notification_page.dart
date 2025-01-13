@@ -8,49 +8,52 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomPageLayout(
+    final Map<String, List<String>> notifications = {
+      "Baru": [
+        "Pertandingan Tottenham dengan Manchester City akan segera dimulai",
+      ],
+      "Hari ini": [
+        "HOT NEWS: Liverpool vs Manchester United 2-2",
+        "Jangan lewatkan pertandingan panas antar Tottenham vs Manchester City Besok",
+      ],
+      "7 Hari Terakhir": [
+        "HOT NEWS: Wolverhampton Wanderers kalah 0-3 dari Nottingham Forest",
+        "Jangan Lewatkan Pertandingan Panas Wanderes vs Nottingham Forest",
+        "HOT NEWS: Brentford kalah 1-3 dari Arsenal",
+        "Jangan Lewatkan Pertandingan Panas Antara Brentford vs Arsenal",
+      ],
+    };
+
+    return CustomPageLayout(
       title: "Notifikasi",
       scrollableChild: true,
       children: [
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Baru"),
-                SizedBox(height: 8),
-                NotificationCardWidget(
-                    text:
-                        "Pertandingan Tottenham dengan Mancehester City akan segera dimulai"),
-                SizedBox(height: 16),
-                Text("Hari ini"),
-                SizedBox(height: 8),
-                NotificationCardWidget(
-                    text: "HOT NEWS: Liverpool vs Manchester United 2-2"),
-                SizedBox(height: 8),
-                NotificationCardWidget(
-                    text:
-                        "Jangan lewatkan pertandingan panas antar Tottenham vs Manchester City Besok"),
-                SizedBox(height: 16),
-                Text("7 Hari Terakhir"),
-                SizedBox(height: 8),
-                NotificationCardWidget(
-                    text:
-                        "HOT NEWS: Wolverhampton Wanderers kalah 0-3 dari Nottingham Forest"),
-                SizedBox(height: 8),
-                NotificationCardWidget(
-                    text:
-                        "Jangan Lewatkan Pertandingan Panas Wanderes vs Nottingham Forest"),
-                SizedBox(height: 8),
-                NotificationCardWidget(
-                    text: "HOT NEWS: Brentford kalah 1-3 dari Arsenal"),
-                SizedBox(height: 8),
-                NotificationCardWidget(
-                    text:
-                        "Jangan Lewatkan Pertandingan Panas Antara Brentfor vs Arsenal"),
-                SizedBox(height: 16),
-              ],
+              children: notifications.entries.map((entry) {
+                final sectionTitle = entry.key;
+                final sectionNotifications = entry.value;
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(sectionTitle),
+                    const SizedBox(height: 8),
+                    ...sectionNotifications.map(
+                      (text) => Column(
+                        children: [
+                          NotificationCardWidget(text: text),
+                          const SizedBox(height: 8),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                );
+              }).toList(),
             ),
           ),
         ),
