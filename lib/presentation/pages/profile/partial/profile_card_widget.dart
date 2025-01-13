@@ -89,6 +89,14 @@ class ProfileCardWidget extends GetView<ProfilePageController> {
               ),
             ),
           ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () => Get.toNamed('/favorite'),
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size(double.infinity, 48),
+            ),
+            child: const Text('Favorite Club'),
+          ),
           const SizedBox(height: 24),
           ElevatedButton(
             onPressed: isEditing ? _onTapSave : _toggleEditMode,

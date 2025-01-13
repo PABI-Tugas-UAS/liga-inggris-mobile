@@ -58,7 +58,7 @@ class FavoriteCardWidget extends StatelessWidget {
           IconButton(
             icon: const Icon(
               Icons.delete_outlined,
-              size: 80,
+              size: 60,
               color: Colors.white,
             ),
             onPressed: () {
