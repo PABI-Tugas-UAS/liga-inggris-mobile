@@ -27,6 +27,7 @@ class NotificationPage extends StatelessWidget {
     return CustomPageLayout(
       title: "Notifikasi",
       scrollableChild: true,
+      onRefresh: () {},
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),

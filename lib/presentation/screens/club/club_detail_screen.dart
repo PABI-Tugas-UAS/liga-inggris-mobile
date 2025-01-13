@@ -42,11 +42,39 @@ class ClubDetailScreen extends GetView<ClubController> {
           height: 120,
         ),
         const SizedBox(height: 8),
-        Text(
-          clubDetails.name,
-          style: const TextStyle(fontSize: 20),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Text(
+                clubDetails.name,
+                style: const TextStyle(fontSize: 20),
+              ),
+              Positioned(
+                right: 0,
+                child: GestureDetector(
+                  onTap: () => controller.toggleFavorite(clubId),
+                  child: SizedBox(
+                    child: Obx(() {
+                      return Icon(
+                        size: 24,
+                        controller.isFavorite(clubId)
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: controller.isFavorite(clubId)
+                            ? Colors.red
+                            : Colors.white,
+                      );
+                    }),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
         const Divider(),
         const SizedBox(height: 16),
         const Text(

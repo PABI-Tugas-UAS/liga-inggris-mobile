@@ -11,17 +11,23 @@ class TabContentTimeline extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            primary: false,
-            itemCount: matchTimeline.length,
-            itemBuilder: (context, index) {
-              final match = matchTimeline[index];
-              return _timelineItem(match);
-            },
+        if (matchTimeline.isEmpty)
+          Container(
+            padding: const EdgeInsets.only(top: 16),
+            child: const Text('No match timeline yet'),
+          )
+        else
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              primary: false,
+              itemCount: matchTimeline.length,
+              itemBuilder: (context, index) {
+                final match = matchTimeline[index];
+                return _timelineItem(match);
+              },
+            ),
           ),
-        ),
       ],
     );
   }

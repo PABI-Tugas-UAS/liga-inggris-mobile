@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/config/app_colors.dart';
 import 'package:liga_inggris_mobile/presentation/common/clickable_card_widget.dart';
 import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
-import 'package:liga_inggris_mobile/presentation/controllers/match/match_page_controller.dart';
+import 'package:liga_inggris_mobile/presentation/controllers/home/home_controller.dart';
 import 'package:liga_inggris_mobile/services/match/model.dart';
 
 class CurrentMatchWidget extends StatelessWidget {
@@ -33,21 +33,17 @@ class CurrentMatchWidget extends StatelessWidget {
   }
 }
 
-class _MatchCard extends GetView<MatchPageController> {
+class _MatchCard extends GetView<HomePageController> {
   final MatchModel match;
 
   const _MatchCard({
     required this.match,
   });
 
-  void _toMatchDetail(int matchId) {
-    controller.goToMatchDetail(matchId);
-  }
-
   @override
   Widget build(BuildContext context) {
     return ClickableCard(
-      onTap: () => _toMatchDetail(match.id),
+      onTap: () => controller.goToMatchDetail(match.id),
       color: AppColors.cardBackground,
       child: DefaultTextStyle(
         style: TextStyle(color: AppColors.text),

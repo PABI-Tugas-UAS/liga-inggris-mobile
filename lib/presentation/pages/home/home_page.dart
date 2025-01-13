@@ -10,7 +10,7 @@ import 'package:liga_inggris_mobile/presentation/pages/home/partial/empty_data_w
 import 'package:liga_inggris_mobile/presentation/pages/home/partial/top_club_widget.dart';
 import 'package:liga_inggris_mobile/presentation/pages/home/partial/upcoming_match_widget.dart';
 
-class HomePage extends GetView<HomeController> {
+class HomePage extends GetView<HomePageController> {
   final CupertinoTabController tabController;
 
   const HomePage({super.key, required this.tabController});
@@ -25,17 +25,18 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return CustomPageLayout(
+      onRefresh: controller.onRefreshPage,
       scrollableChild: true,
       children: [
         Column(
           children: [
             // current match
             Obx(() {
-              if (controller.clubController.isLoading.value) {
+              if (controller.matchController.isCurrentMatchesLoading.value) {
                 return const Center(child: Text("Loading..."));
               }
 
-              if (controller.clubController.clubs.isEmpty) {
+              if (controller.matchController.currentMatches.isEmpty) {
                 return const EmptyDataWidget(
                   title: "Pertandingan Saat Ini",
                   message: "Tidak ada pertandingan",

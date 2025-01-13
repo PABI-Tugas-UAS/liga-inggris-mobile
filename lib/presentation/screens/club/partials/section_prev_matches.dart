@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liga_inggris_mobile/app/config/app_colors.dart';
+import 'package:liga_inggris_mobile/app/controllers/match/match_controller.dart';
 import 'package:liga_inggris_mobile/presentation/common/clickable_card_widget.dart';
 import 'package:liga_inggris_mobile/presentation/common/club_logo_widget.dart';
 import 'package:liga_inggris_mobile/services/match/model.dart';
@@ -20,10 +22,16 @@ class SectionPreviousMatches extends StatelessWidget {
   }
 
   Widget _matchCard(MatchModel match) {
+    void goToMatchDetail(MatchModel match) {
+      Get.find<MatchController>().fetchMatchDetails(match.id.toString());
+
+      Get.toNamed('/match/${match.id}');
+    }
+
     return FractionallySizedBox(
       widthFactor: 0.4,
       child: ClickableCard(
-        onTap: () => {},
+        onTap: () => goToMatchDetail(match),
         color: AppColors.cardBackground,
         shape: RoundedRectangleBorder(
           side: const BorderSide(color: Colors.white),

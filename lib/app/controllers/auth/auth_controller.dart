@@ -7,20 +7,23 @@ class AuthController extends GetxController {
   AuthController();
   var isLoggedIn = false.obs;
   final AuthService _authService = AuthService();
+  var isDebug = false;
 
   @override
   void onInit() async {
-    print("!!! init");
     super.onInit();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isLoggedIn.value = prefs.getBool('isLoggedIn') ?? false;
 
-    // TODO: remove "|| true" amd prefs set on production, only leave Get.offNamed('/signin')
-    if (isLoggedIn.value || true) {
+    if (isDebug) {
       await prefs.setBool('isLoggedIn', true);
-      await prefs.setString('email', 'fanes@gmail.com');
+      await prefs.setString('email', 'akundebug@gmail.com');
       await prefs.setString('user',
-          '{"email": "fanes@gmail.com", "name": "fanas", "password": "***********"}');
+          '{"email": "akundebug@gmail.com", "name": "debug mode", "password": "***********"}');
+      return Get.offNamed('/');
+    }
+
+    if (isLoggedIn.value) {
       Get.offNamed('/');
     } else {
       Get.offNamed('/signin');

@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:liga_inggris_mobile/app/controllers/club/club_controller.dart';
+import 'package:liga_inggris_mobile/services/club/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:liga_inggris_mobile/services/auth/model.dart';
 import 'package:flutter/material.dart';
@@ -9,16 +11,20 @@ class ProfilePageController extends GetxController {
   var bio = ''.obs;
   var isEditing = false.obs;
   var user = Rxn<UserModel>();
+  var favoriteClubs = <ClubModel>[].obs;
 
   late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController bioController;
 
+  final ClubController _clubController = Get.find<ClubController>();
+
   @override
   void onInit() {
     super.onInit();
-    print("!!! initawdawd");
     loadProfileData();
+    loadFavoriteClubs();
+    ever(_clubController.favoriteClubs, (_) => loadFavoriteClubs());
     usernameController = TextEditingController();
     emailController = TextEditingController();
     bioController = TextEditingController();
@@ -30,7 +36,6 @@ class ProfilePageController extends GetxController {
 
     String? userJson = prefs.getString('user');
     if (userJson != null) {
-      print("=======> $userJson");
       user.value = UserModel.fromJson(userJson);
     } else {
       user.value = UserModel(
@@ -75,10 +80,33 @@ class ProfilePageController extends GetxController {
     );
   }
 
+  void loadFavoriteClubs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String> storedFavoriteClubs =
+        prefs.getStringList('favoriteClubs') ?? [];
+    var allClubs = _clubController.clubs;
+
+    favoriteClubs.value = allClubs.where((club) {
+      return storedFavoriteClubs.contains(club.id.toString());
+    }).toList();
+  }
+
+  void deleteFavoriteClub(int id) {
+    favoriteClubs.removeWhere((club) => club.id == id);
+    Get.find<ClubController>().toggleFavorite(id.toString());
+  }
+
   void logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
     Get.toNamed('/signin');
     Get.delete();
+  }
+
+  void goToClubDetail(int clubId) {
+    _clubController.fetchClubDetails(clubId.toString());
+
+    Get.toNamed('/clubs/$clubId');
   }
 }

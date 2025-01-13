@@ -13,6 +13,7 @@ class SearchPage extends GetView<SearchPageController> {
   @override
   Widget build(BuildContext context) {
     return CustomPageLayout(
+      onRefresh: controller.onPageRefresh,
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 12, right: 12, bottom: 8),
@@ -38,10 +39,10 @@ class SearchPage extends GetView<SearchPageController> {
         ),
         Obx(() {
           if (controller.clubController.isLoading.value) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
-          return Expanded(
-            child: ListClubWidget(clubs: controller.clubController.clubs),
+          return ListClubWidget(
+            clubs: controller.clubController.clubs,
           );
         }),
       ],

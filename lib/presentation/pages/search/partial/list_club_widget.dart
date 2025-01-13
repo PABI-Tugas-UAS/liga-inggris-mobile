@@ -18,13 +18,13 @@ class ListClubWidget extends StatelessWidget {
       );
     }
 
-    return Flexible(
-      child: ListView.builder(
-        itemCount: clubs.length,
-        itemBuilder: (context, index) {
-          return ClubCardWidget(club: clubs[index]);
-        },
-      ),
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: clubs.length,
+      itemBuilder: (context, index) {
+        return ClubCardWidget(club: clubs[index]);
+      },
     );
   }
 }

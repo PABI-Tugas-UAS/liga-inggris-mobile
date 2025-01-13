@@ -19,4 +19,8 @@ class MatchPageController extends GetxController {
 
     Get.toNamed('/match/$matchId');
   }
+
+  void onPageRefresh() {
+    matchController.fetchMatches();
+  }
 }
