@@ -5,10 +5,12 @@ import 'package:liga_inggris_mobile/app/config/app_colors.dart';
 import 'package:liga_inggris_mobile/app/enums/tab_enum.dart';
 import 'package:liga_inggris_mobile/presentation/controllers/home/home_binding.dart';
 import 'package:liga_inggris_mobile/presentation/controllers/match/match_binding.dart';
+import 'package:liga_inggris_mobile/presentation/controllers/notifications/notification_binding.dart';
 import 'package:liga_inggris_mobile/presentation/controllers/profile/profile_binding.dart';
 import 'package:liga_inggris_mobile/presentation/controllers/search/search_binding.dart';
 import 'package:liga_inggris_mobile/presentation/pages/home/home_page.dart';
 import 'package:liga_inggris_mobile/presentation/pages/match/match_page.dart';
+import 'package:liga_inggris_mobile/presentation/pages/notifications/notification_page.dart';
 import 'package:liga_inggris_mobile/presentation/pages/profile/profile_page.dart';
 import 'package:liga_inggris_mobile/presentation/pages/search/search_page.dart';
 
@@ -57,9 +59,8 @@ class _LayoutPageState extends State<LayoutPage> {
         return SearchPage(tabController: _tabController);
 
       case TabEnums.notification:
-        return const Center(
-          child: Text('Notification'),
-        );
+        NotificationBinding().dependencies();
+        return const NotificationPage();
 
       case TabEnums.profile:
         ProfileBinding().dependencies();
