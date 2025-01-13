@@ -15,6 +15,12 @@ class FavoriteScreen extends GetView<ProfilePageController> {
       goBackTitle: "Favorit Klub",
       children: [
         Obx(() {
+          if (favoriteClubs.isEmpty) {
+            return const Center(
+              child: Text("Belum ada klub favorit"),
+            );
+          }
+
           return Column(
             children: [
               ...favoriteClubs.map((club) {
