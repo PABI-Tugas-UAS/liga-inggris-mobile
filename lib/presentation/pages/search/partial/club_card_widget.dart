@@ -44,11 +44,13 @@ class ClubCardWidget extends GetView<SearchPageController> {
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(left: 16.0, right: 32.0),
+                  width: 220,
+                  padding: const EdgeInsets.only(left: 12, right: 16),
                   child: Text(
                     club.name ?? 'Unknown Club',
                     style: const TextStyle(
                       color: Colors.white,
+                      overflow: TextOverflow.ellipsis,
                       fontSize: 18,
                     ),
                   ),
