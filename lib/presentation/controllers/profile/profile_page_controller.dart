@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:liga_inggris_mobile/app/controllers/club/club_controller.dart';
 import 'package:liga_inggris_mobile/services/club/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:liga_inggris_mobile/services/auth/model.dart';
@@ -15,6 +16,8 @@ class ProfilePageController extends GetxController {
   late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController bioController;
+
+  final ClubController _clubController = Get.find<ClubController>(); 
 
   @override
   void onInit() {
@@ -79,36 +82,15 @@ class ProfilePageController extends GetxController {
   }
 
   void loadFavoriteClubs() {
-    favoriteClubs.addAll([
-      ClubModel(
-        id: 1,
-        name: "Arsenal",
-        coach: "Ole Gunnar Solskjaer",
-        foundedYear: 1878,
-        achievements: [
-          "Premier League",
-          "FA Cup",
-          "UEFA Champions League",
-        ],
-        logo: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
-      ),
-      ClubModel(
-        id: 2,
-        name: "Chelsea",
-        coach: "Thomas Tuchel",
-        foundedYear: 1905,
-        achievements: [
-          "Premier League",
-          "FA Cup",
-          "UEFA Champions League",
-        ],
-        logo: "https://upload.wikimedia.org/wikipedia/id/c/cc/Chelsea_FC.svg",
-      ),
-    ]);
+    var allClubs = _clubController.clubs;
+    favoriteClubs.value = allClubs.where((club) {
+      return _clubController.favoriteClubs.contains(club.id.toString());
+    }).toList();
   }
 
   void deleteFavoriteClub(int id) {
     favoriteClubs.removeWhere((club) => club.id == id);
+    Get.find<ClubController>().toggleFavorite(id.toString());
   }
 
   void logout() async {

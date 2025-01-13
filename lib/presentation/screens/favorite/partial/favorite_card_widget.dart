@@ -23,7 +23,7 @@ class FavoriteCardWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: SizedBox(
-                height: 120,
+                height: 80,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -34,8 +34,8 @@ class FavoriteCardWidget extends StatelessWidget {
                         alignment: Alignment.center,
                         child: ClubLogoWidget(
                           imageUrl: club.logo ?? '',
-                          width: 80,
-                          height: 80,
+                          width: 50,
+                          height: 50,
                         ),
                       ),
                     ),
@@ -77,7 +77,8 @@ class FavoriteCardWidget extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        Get.find<ProfilePageController>().deleteFavoriteClub(club.id!);
+                        Get.find<ProfilePageController>()
+                            .deleteFavoriteClub(club.id!);
                         Navigator.pop(context);
                       },
                       child: const Text('Hapus'),
