@@ -37,14 +37,19 @@ class SearchPage extends GetView<SearchPageController> {
             ),
           ),
         ),
-        Obx(() {
-          if (controller.clubController.isLoading.value) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          return ListClubWidget(
-            clubs: controller.clubController.clubs,
-          );
-        }),
+        Obx(
+          () {
+            if (controller.clubController.isLoading.value) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            final clubs = controller.searchQuery.isEmpty
+                ? controller.clubController.clubs
+                : controller.clubController.searchClub;
+
+            return ListClubWidget(clubs: clubs);
+          },
+        ),
       ],
     );
   }
