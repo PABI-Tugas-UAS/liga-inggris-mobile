@@ -7,6 +7,7 @@ class SearchPageController extends GetxController {
 
   final ClubController clubController = Get.find();
   Timer? _debounce;
+  var searchQuery = ''.obs;
 
   @override
   void onInit() {
@@ -21,6 +22,8 @@ class SearchPageController extends GetxController {
   }
 
   void onSearchChanged(String query) {
+    searchQuery.value = query;
+
     if (_debounce?.isActive ?? false) _debounce?.cancel();
 
     _debounce = Timer(const Duration(milliseconds: 300), () {
